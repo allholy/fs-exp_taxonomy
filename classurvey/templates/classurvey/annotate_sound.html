@@ -1,0 +1,47 @@
+{% block content %}
+
+    <div style="display: flex; justify-content: center;">
+        
+        <iframe 
+        id="encoder_iframe"
+        frameborder="0" scrolling="no" 
+        src="https://freesound.org/embed/sound/iframe/{{ test_sound.sound_id }}/simple/large/" 
+        width="920" height="245">
+        </iframe>
+
+    </div>
+
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <input type="hidden" name="test_sound_id" value="{{ test_sound.id }}">
+      
+      <fieldset>
+        <legend>{{ form.chosen_class.label }}</legend>
+
+        {{ form.chosen_class.errors }}  
+        {% for option in form.chosen_class %}
+            {% if option.data.value == "M-SOLO"  %}
+            <div >
+                MUSIC
+            </div>
+            {% elif option.data.value == "FX-HOUSE"  %}
+            <div >
+                SOUND EFFECTS
+            </div>
+            {% elif option.data.value == "SP-CR"  %}
+                SPEECH
+             <div >
+           </div>
+            {% endif %}
+        <div class="myradio">
+            {{ option }}
+        </div>
+        {% endfor %}
+    </fieldset>
+
+      <input type="submit" value="Vote">
+    </form>
+    
+    
+{% endblock %}
