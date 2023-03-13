@@ -21,18 +21,26 @@
 
         {{ form.chosen_class.errors }}  
         {% for option in form.chosen_class %}
-            {% if option.data.value == "M-SOLO"  %}
-            <div >
+            {% if option.data.value == "m-p" %}
+            <div>
                 MUSIC
             </div>
-            {% elif option.data.value == "FX-HOUSE"  %}
-            <div >
+            {% elif option.data.value == "i-p" %}
+            <div>
+                INSTRUMENT SAMPLES
+            </div>
+            {% elif option.data.value == "sp-s" %}
+            <div>
+                SPEECH
+            </div>
+            {% elif option.data.value == "fx-o" %}
+            <div>
                 SOUND EFFECTS
             </div>
-            {% elif option.data.value == "SP-CR"  %}
-                SPEECH
-             <div >
-           </div>
+            {% elif option.data.value == "ss-n" %}
+            <div>
+                SOUNDSCAPES
+            </div>
             {% endif %}
         <div class="myradio">
             {{ option }}
