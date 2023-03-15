@@ -9,10 +9,10 @@ import random
 
 
 def user_id_from_request(request):
-    user_id = request.session.get("user_id", None)
+    user_id = request.session.get('user_id', None)
     if user_id is None:
-        user_id= "user_"+ str(random.randint(99,9999999))
-        request.session["user_id"]= user_id
+        user_id = 'user_'+ str(random.randint(10,9999999))
+        request.session['user_id'] = user_id
     return user_id
 
 def assign_group(request,user_id):
@@ -59,24 +59,26 @@ def get_next_sound_for_user(request):
 
 #test one question
 def annotate_sound(request):
+
     user_id = user_id_from_request(request)
 
     if request.POST:
         form = SoundAnswerForm(request.POST)
-        test_sound = TestSound.objects.get(id=request.POST.get("test_sound_id"))
+        test_sound = TestSound.objects.get(id=request.POST.get('test_sound_id'))
+
         if form.is_valid():
             sound_answer = form.save(commit=False)
-            sound_answer.test_sound_id = request.POST.get("test_sound_id")
+            sound_answer.test_sound_id = request.POST.get('test_sound_id')
             sound_answer.user_id = user_id
             sound_answer.save()
             # redirect to next sound
 
-            print(f"number of answers {SoundAnswer.objects.count()}")
+            print(f'number of answers {SoundAnswer.objects.count()}')
             return HttpResponseRedirect(reverse('classurvey:main'))
 
     else:
         form = SoundAnswerForm()
-        test_sound=get_next_sound_for_user(user_id)
+        test_sound = get_next_sound_for_user(user_id)
         if test_sound is None:
             return HttpResponseRedirect(reverse('classurvey:exit'))
 
