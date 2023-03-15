@@ -1,0 +1,10 @@
+{% block content %}
+<h1>Basic Instructions</h1>
+<p>
+    instructions here.....blah blah blah
+</p>
+<form method="post" action="{% url 'classurvey:main' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Continue</button>
+</form>
+{% endblock %}

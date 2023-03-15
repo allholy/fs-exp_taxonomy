@@ -82,3 +82,6 @@ def annotate_sound(request):
 
     return render(request, 'classurvey/annotate_sound.html', {'test_sound': test_sound, 'form': form})
 
+
+def instructions_view(request):
+    return render(request, 'classurvey/instructions.html')
