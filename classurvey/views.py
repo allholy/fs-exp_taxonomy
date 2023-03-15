@@ -33,7 +33,7 @@ def assign_group(request,user_id):
 
 def home_view(request):
     user_id_from_request(request)
-    assign_group(request)
+    assign_group(request,user_id)
     return render(request, 'classurvey/home.html')
 
 
@@ -43,7 +43,7 @@ def get_next_sound_for_user(request):
     sound until no more sound are remaining. 
     '''
     user_id = user_id_from_request(request)
-    group_number = assign_group(request)
+    group_number = assign_group(request,user_id)
 
     test_sound_ids_in_group = TestSound.objects.filter(sound_group=group_number).values_list('id', flat=True)
     test_sound_ids_already_answered = SoundAnswer.objects.filter(test_sound_id__in=test_sound_ids_in_group, user_id=user_id).values_list('test_sound_id', flat=True)
