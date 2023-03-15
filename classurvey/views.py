@@ -45,19 +45,15 @@ def get_next_sound_for_user(request):
     user_id = user_id_from_request(request)
     group_number = assign_group(request)
 
-    remaining_sounds = TestSound.objects.filter(sound_group=group_number)
+    test_sound_ids_in_group = TestSound.objects.filter(sound_group=group_number).values_list('id', flat=True)
+    test_sound_ids_already_answered = SoundAnswer.objects.filter(test_sound_id__in=test_sound_ids_in_group, user_id=user_id).values_list('test_sound_id', flat=True)
 
-    passed_sound_ids = request.session.get('passed_sound_ids', [])
-
-    remaining_sounds = remaining_sounds.exclude(id__in=passed_sound_ids)
+    remaining_sounds = TestSound.objects.filter(sound_group=group_number).exclude(id__in=test_sound_ids_already_answered)
 
     if not remaining_sounds:
         return None
     else:
         next_sound = random.choice(remaining_sounds)
-        passed_sound_ids.append(next_sound.id)
-        request.session[f'passed_sound_ids'] = passed_sound_ids
-
         return next_sound
 
 
