@@ -8,4 +8,6 @@ urlpatterns = [
     path('instructions/', views.instructions_view, name='instructions'),
     path('details/', views.user_details_view, name='user_details'),
     path('question/',views.annotate_sound, name='main'),
+    path('exit-info/', views.exit_info_view, name='exit_info'),
+    path('end/', views.end_view, name='end'),
 ]

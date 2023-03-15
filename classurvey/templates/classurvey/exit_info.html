@@ -1,0 +1,8 @@
+<form method="post" action="{% url 'classurvey:end' %}">
+    {% csrf_token %}
+
+    <legend>{{ form.answer.label }}</legend>
+    {{ form.answer }}
+    
+    <button type="submit" class="btn btn-primary">Finish</button>
+</form>

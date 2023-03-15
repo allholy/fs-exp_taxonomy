@@ -1,5 +1,5 @@
 from django import forms
-from .models import SoundAnswer
+from .models import SoundAnswer, ExitInfoModel
 
 
 class SoundAnswerForm(forms.ModelForm):
@@ -18,3 +18,13 @@ class UserDetailsForm(forms.Form):
     experience_choices = [('1', 'Hobby'), ('2', 'Professional')]
     question1 = forms.ChoiceField(choices=fsuser_choices)
     question2 = forms.ChoiceField(choices=experience_choices)
+
+
+class ExitInfoForm(forms.ModelForm):
+    answer = forms.CharField(widget=forms.Textarea)
+
+    class Meta:
+        model = ExitInfoModel
+        fields = ('answer',)
+        # TODO: bug - label is not displaying
+        labels = {'answer':'Do you have anything to say little user?'}

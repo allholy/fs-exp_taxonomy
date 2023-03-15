@@ -97,3 +97,16 @@ def user_details_view(request):
         form =  UserDetailsForm()
 
     return render(request, 'classurvey/user_details.html', {'form': form})
+
+def exit_info_view(request):
+    if request.method == 'POST':
+        form = ExitInfoForm(request.POST)
+        if form.is_valid():
+            response = form.save()
+            return redirect(reverse('classurvey:end'))
+    else:
+        form = ExitInfoForm()
+    return render(request, 'classurvey/exit_info.html', {'form': form})
+
+def end_view(request):
+    return render(request, 'classurvey/end_page.html')

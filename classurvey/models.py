@@ -52,3 +52,7 @@ class SoundAnswer(models.Model):
         ("ss-other", "Other")
     )
     chosen_class = models.CharField(max_length=15, choices=test_choices, default="")
+
+
+class ExitInfoModel(models.Model):
+    answer = models.CharField(max_length=255)
