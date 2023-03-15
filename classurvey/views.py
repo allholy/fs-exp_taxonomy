@@ -80,7 +80,7 @@ def annotate_sound(request):
         form = SoundAnswerForm()
         test_sound = get_next_sound_for_user(user_id)
         if test_sound is None:
-            return HttpResponseRedirect(reverse('classurvey:exit'))
+            return HttpResponseRedirect(reverse('classurvey:exit_info'))
 
     return render(request, 'classurvey/annotate_sound.html', {'test_sound': test_sound, 'form': form})
 
