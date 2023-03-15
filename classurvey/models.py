@@ -9,14 +9,18 @@ class TestSound(models.Model):
 
     def __str__(self):
         return f"<TestSound {self.sound_id}>"
-    
+
 
 # store data
 class SoundAnswer(models.Model):
-    # should be foreign key
+
     user_id = models.CharField(max_length=50)  # this can be FS ID or IP ADDRESS
     test_sound = models.ForeignKey(TestSound, on_delete=models.CASCADE)
-    # available choices, test for now with few
+
+    # NOTE: If you change the keys, you have to be careful 
+    # to change them manually in annotate_sound.html file.
+
+    # available choices
     test_choices =(
         ("m-p", "Percussion"),
         ("m-si","Solo"),
@@ -41,8 +45,8 @@ class SoundAnswer(models.Model):
         ("fx-h", "Human sounds"),
         ("fx-a","Animals"),
         ("fx-n","Natural occurrences"),
-        ("fx-el","Electronic - Sci-fi"),
-        ("fx-experiment","Experimental"),
+        ("fx-el","Electronic - Scifi"),
+        ("fx-exp","Experimental"),
         ("fx-d","Design"),
         ("fx-other", "Other"),
 
