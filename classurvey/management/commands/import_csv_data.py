@@ -25,10 +25,13 @@ class Command(BaseCommand):
 
 # import data
 def import_sounds_csv(file_path):
+    #NOTE: remember to delete all existing data before re-upload
+    #TestSound.objects.all().delete
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             sound = TestSound.objects.create(
                 sound_id=row['ID'],
-                sound_class=row['Class']
+                sound_class=row['Class'],
+                sound_group=row['Group']
             )
