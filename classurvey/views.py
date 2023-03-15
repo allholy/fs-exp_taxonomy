@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 from django.urls import reverse
-from django.http import HttpResponseRedirect
 from .models import SoundAnswer, TestSound
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
 import random
@@ -74,13 +73,13 @@ def annotate_sound(request):
             # redirect to next sound
 
             print(f'number of answers {SoundAnswer.objects.count()}')
-            return HttpResponseRedirect(reverse('classurvey:main'))
+            return redirect(reverse('classurvey:main'))
 
     else:
         form = SoundAnswerForm()
         test_sound = get_next_sound_for_user(request)
         if test_sound is None:
-            return HttpResponseRedirect(reverse('classurvey:exit_info'))
+            return redirect(reverse('classurvey:exit_info'))
 
     return render(request, 'classurvey/annotate_sound.html', {'test_sound': test_sound, 'form': form})
 
