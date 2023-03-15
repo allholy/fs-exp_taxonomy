@@ -15,17 +15,35 @@ def user_id_from_request(request):
         request.session["user_id"]= user_id
     return user_id
 
+def assign_group(request,user_id):
+    ''' 
+    Assign one group to the user and save it to the session.
+    '''
+    available_groups = TestSound.objects.values_list('sound_group', flat=True).distinct()
+    groups_already_done = SoundAnswer.objects.filter(user_id=user_id).values_list('sound_group', flat=True).distinct()
+
+    selected_group = request.session.get('group_number', None)
+    if selected_group is None:
+        remaining_groups = available_groups - groups_already_done
+        selected_group = random.choice(remaining_groups)
+        request.session['group_number'] = selected_group
+
+    return selected_group
+
 
 def home_view(request):
     user_id_from_request(request)
+    assign_group(request)
     return render(request, 'classurvey/home.html')
 
-def get_next_sound_for_user(request, group_number):
+
+def get_next_sound_for_user(request):
     '''
     Retrieve the sounds that belong to a group and each time return one random
     sound until no more sound are remaining. 
     '''
     user_id = user_id_from_request(request)
+    group_number = assign_group(request)
 
     remaining_sounds = TestSound.objects.filter(sound_group=group_number)
 
