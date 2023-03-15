@@ -31,7 +31,7 @@ def assign_group(request,user_id):
 
 
 def home_view(request):
-    user_id_from_request(request)
+    user_id = user_id_from_request(request)
     assign_group(request,user_id)
     return render(request, 'classurvey/home.html')
 
