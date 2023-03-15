@@ -1,0 +1,6 @@
+<form method="post" action="{% url 'classurvey:main' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"> Next </button>
+  </form>
+  

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import SoundAnswer, TestSound
-from .forms import SoundAnswerForm
+from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
 import random
 
 
@@ -85,3 +85,15 @@ def annotate_sound(request):
 
 def instructions_view(request):
     return render(request, 'classurvey/instructions.html')
+
+def user_details_view(request):
+    if request.method == 'POST':
+        form = UserDetailsForm(request.POST)
+        if form.is_valid():
+            choice1 = form.cleaned_data['question1']
+            choice2 = form.cleaned_data['question2']
+            # do something with the choices
+    else:
+        form =  UserDetailsForm()
+
+    return render(request, 'classurvey/user_details.html', {'form': form})
