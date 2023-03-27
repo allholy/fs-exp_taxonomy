@@ -1,6 +1,11 @@
-<form method="post" action="{% url 'classurvey:main' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit"> Next </button>
-  </form>
+{% extends 'classurvey/base.html' %}
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" class="btn btn-outline-dark" value="Next">
+</form>
   
+{% endblock content %}

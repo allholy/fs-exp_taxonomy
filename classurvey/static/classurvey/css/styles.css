@@ -1,0 +1,113 @@
+body {
+    background-color: #f5f5f5;
+    font-family: "Times New Roman", Times, serif;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+}
+
+li a:hover:not(.active) {
+    color: white;
+    text-decoration: none;
+  }
+
+
+.button1 {
+    background-color: #d1deec;
+    border-color: #000000;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.button-main {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button-main:hover {
+    background-color: #0270e6;
+}
+
+.button-end {
+    margin-top: 10px;
+}
+
+.button-end a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.invisible-link {
+    text-decoration: none; 
+    color: inherit;
+}
+
+.container-start {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container-instr {
+    width: 70%;
+    margin: auto;
+}
+
+.card {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header.bg-light {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 20px;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.brd {
+    border: 2px solid black; 
+    padding: 10px; 
+    text-align: center;
+}
+
+.pos-end {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 60vh;
+}
+
+
+/* Responsive styles */
+@media screen and (max-width: 640px) {
+    .container {
+        max-width: 100%;
+        box-shadow: none;
+    }
+}

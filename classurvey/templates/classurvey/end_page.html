@@ -1,7 +1,20 @@
+{% extends 'classurvey/base.html' %}
+
 {% block content %}
-    <h1>
-        Thank you for participating on the survey. 
-        Your answers have been submitted successfully. 
-        You can now close this page or redo the test with another group of sounds.
-    </h1>
-{% endblock %}
+
+<div class="pos-end">
+    <div class="brd">
+        <h3> 
+            Thank you for participating on the survey. Your answers have been submitted successfully. 
+        </h3>
+
+        You can now close this page or redo the test with another group of sounds. 
+        <br>
+
+        <button type="button" class="btn btn-primary btn-sm button-end">
+        <a class="invisible-link" href="{% url 'classurvey:home' %}">Redo</a>
+        </button>
+    </div>
+</div>
+
+{% endblock content %}
