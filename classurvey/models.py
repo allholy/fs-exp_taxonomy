@@ -14,8 +14,10 @@ class TestSound(models.Model):
 # store data
 class SoundAnswer(models.Model):
 
-    user_id = models.CharField(max_length=50)  # this can be FS ID or IP ADDRESS
+    user_id = models.CharField(max_length=50)  # random generate
     test_sound = models.ForeignKey(TestSound, on_delete=models.CASCADE)
+    date_created = models.DateTimeField('Creation date', auto_now_add=True) #timezone aware
+    #ip_address = models.CharField(max_length=50) 
 
     # NOTE: If you change the keys, you have to be careful 
     # to change them manually in annotate_sound.html file.
