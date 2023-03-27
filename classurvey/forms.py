@@ -21,10 +21,8 @@ class UserDetailsForm(forms.Form):
 
 
 class ExitInfoForm(forms.ModelForm):
-    answer = forms.CharField(widget=forms.Textarea)
+    answer = forms.CharField(widget=forms.Textarea, label='Do you have anything to say little user?')
 
     class Meta:
         model = ExitInfoModel
         fields = ('answer',)
-        # TODO: bug - label is not displaying
-        labels = {'answer':'Do you have anything to say little user?'}
