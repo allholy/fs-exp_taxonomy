@@ -24,10 +24,11 @@ def assign_group(request,user_id):
 
     selected_group = request.session.get('group_number', None)
     if selected_group is None:
-        remaining_groups = available_groups - groups_already_done
-        selected_group = random.choice(remaining_groups)
-        request.session['group_number'] = selected_group
-
+        # TODO: what happenes when they do all? -> remaining_groups
+        # i want it to redirect to a page when they press button that says they tested all available sounds.
+        remaining_groups = set(available_groups) - set(groups_already_done)
+        selected_group = random.choice(list(remaining_groups))
+        request.session['group_number'] = selected_group   
     return selected_group
 
 
