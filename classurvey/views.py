@@ -19,7 +19,8 @@ def assign_group(request,user_id):
     Assign one group to the user and save it to the session.
     '''
     available_groups = TestSound.objects.values_list('sound_group', flat=True).distinct()
-    groups_already_done = SoundAnswer.objects.filter(user_id=user_id).values_list('sound_group', flat=True).distinct()
+    groups_already_done = SoundAnswer.objects.filter(user_id=user_id).values_list('test_sound__sound_group', flat=True).distinct()
+    print(available_groups, groups_already_done)
 
     selected_group = request.session.get('group_number', None)
     if selected_group is None:
