@@ -93,12 +93,10 @@ def user_details_view(request):
     if request.method == 'POST':
         form = UserDetailsForm(request.POST)
         if form.is_valid():
-            choice1 = form.cleaned_data['question1']
-            choice2 = form.cleaned_data['question2']
-            # do something with the choices
+            response = form.save()
+            return redirect(reverse('classurvey:main'))
     else:
-        form =  UserDetailsForm()
-
+        form = UserDetailsForm()
     return render(request, 'classurvey/user_details.html', {'form': form})
 
 def exit_info_view(request):
