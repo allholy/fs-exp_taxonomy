@@ -1,5 +1,5 @@
 from django import forms
-from .models import SoundAnswer, ExitInfoModel
+from .models import SoundAnswer, ExitInfoModel, UserDetailsModel
 
 
 class SoundAnswerForm(forms.ModelForm):
@@ -13,12 +13,23 @@ class SoundAnswerForm(forms.ModelForm):
         }
 
 
-class UserDetailsForm(forms.Form):
-    fsuser_choices = [('Y', 'Yes'), ('N', 'No')]
-    experience_choices = [('1', 'Hobby'), ('2', 'Professional')]
-    question1 = forms.ChoiceField(choices=fsuser_choices)
-    question2 = forms.ChoiceField(choices=experience_choices)
+class UserDetailsForm(forms.ModelForm):
 
+    class Meta:
+        model = UserDetailsModel
+        fields = '__all__'
+        labels = {
+            'q1':'Are you a Freesound user?',
+            'q2':'If so, how many sounds have you uploaded (approximately)?',
+            'q3':'Do you have experience with music technology?',
+            'q4':'Are you a musician?',
+        }
+        widgets = {
+            'q1': forms.RadioSelect,
+            'q2': forms.NumberInput(attrs={'min':0,'max':49999}),
+            'q3': forms.RadioSelect,
+            'q4': forms.RadioSelect,
+        }
 
 class ExitInfoForm(forms.ModelForm):
     answer = forms.CharField(widget=forms.Textarea, label='Do you have anything to say little user?')

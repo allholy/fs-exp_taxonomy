@@ -62,4 +62,10 @@ class SoundAnswer(models.Model):
 
 
 class ExitInfoModel(models.Model):
-    answer = models.CharField(max_length=255)
+class UserDetailsModel(models.Model):
+    yes_no = (('Y', 'Yes'), ('N', 'No'))
+    experience_choices = (('1', 'Nope'), ('2', 'Hobby'), ('3', 'Professional'))
+    q1 = models.CharField(max_length=50,choices=yes_no,default="")
+    q2 = models.IntegerField()
+    q3 = models.CharField(max_length=50,choices=experience_choices,default="")
+    q4 = models.CharField(max_length=50,choices=yes_no,default="")
