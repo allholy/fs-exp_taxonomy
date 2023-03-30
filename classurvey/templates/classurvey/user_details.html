@@ -7,12 +7,11 @@
   <fieldset>
     <legend>User Questions</legend>
 
-    {% for field in form %}
-    <div style="margin-bottom: 50px">
-      {{ field.label_tag }}
-      {{ field }}
+    {{ form.as_p}}
+
+    <div style="text-align: center;">
+    <input type="submit" class="btn btn-outline-dark" value="Next">
     </div>
-    {% endfor %}
   </fieldset>
 
 </form>
