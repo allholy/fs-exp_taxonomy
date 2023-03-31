@@ -2,56 +2,67 @@
 
 {% block content %}
 
-    <div style="display: flex; justify-content: center;">
-        
-        <iframe 
-        id="encoder_iframe"
-        frameborder="0" scrolling="no" 
-        src="https://freesound.org/embed/sound/iframe/{{ test_sound.sound_id }}/simple/large/" 
-        width="920" height="245">
-        </iframe>
 
-    </div>
+<form method="post" novalidate>
+    {% csrf_token %}
+    <input type="hidden" name="test_sound_id" value="{{ test_sound.id }}">
 
-
-    <form method="post" novalidate>
-      {% csrf_token %}
-      <input type="hidden" name="test_sound_id" value="{{ test_sound.id }}">
-      
-      <fieldset>
+    <fieldset class="container-simple card">
+        <div class="card-header bg-light">
         <legend>{{ form.chosen_class.label }}</legend>
+        </div>
 
-        {{ form.chosen_class.errors }}  
+        <div class="row">
+            <div class="col-12">
+
+            <iframe id="encoder_iframe" frameborder="0" scrolling="no"
+                src="https://freesound.org/embed/sound/iframe/{{ test_sound.sound_id }}/simple/large_no_info/" 
+                style="width: 920px; height: 215px; transform:translateX(10px) scale(0.85); ">
+            </iframe>
+            </div>
+        
+        </div>
+
+        <div class="row">
+           
+        {{ form.chosen_class.errors }}
         {% for option in form.chosen_class %}
-            {% if option.data.value == "m-p" %}
-            <div>
-                MUSIC
-            </div>
-            {% elif option.data.value == "i-p" %}
-            <div>
-                INSTRUMENT SAMPLES
-            </div>
-            {% elif option.data.value == "sp-s" %}
-            <div>
-                SPEECH
-            </div>
-            {% elif option.data.value == "fx-o" %}
-            <div>
-                SOUND EFFECTS
-            </div>
-            {% elif option.data.value == "ss-n" %}
-            <div>
-                SOUNDSCAPES
-            </div>
-            {% endif %}
+        {% if option.data.value == "m-sp" %}
+        <div class="col-12 col-lg-6">
+        <div class="topclass-names">
+            MUSIC
+        </div>
+        {% elif option.data.value == "i-p" %}
+        <div class="topclass-names">
+            INSTRUMENT SAMPLES
+        </div>
+        {% elif option.data.value == "sp-s" %}
+        <div class="topclass-names">
+            SPEECH
+        </div>
+        {% elif option.data.value == "fx-o" %}  
+        </div>
+        <div class="col-12 col-lg-6">
+        <div class="topclass-names">
+            SOUND EFFECTS
+        </div>
+        {% elif option.data.value == "ss-n" %}
+        <div class="topclass-names">
+            SOUNDSCAPES
+        </div>
+        {% endif %}
         <div class="myradio">
             {{ option }}
         </div>
         {% endfor %}
-    </fieldset>
+        </div></div>
+   
+        <div class="right">
+        <input type="submit" class="btn btn-outline-dark" value="Next">
+        </div>
+        </fieldset>
 
-    <input type="submit" class="btn btn-outline-dark btn-sm" value="Vote">
-    </form>
-    
-    
+</form>
+
+
 {% endblock %}
