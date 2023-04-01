@@ -31,10 +31,12 @@ class UserDetailsForm(forms.ModelForm):
             'q4': forms.RadioSelect,
         }
 
+
 class ExitInfoForm(forms.ModelForm):
     answer = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 5, 'cols': 50, 'required': False}), 
-        label='Do you have anything to say little user?'
+        widget=forms.Textarea(attrs={'rows': 5, 'cols': 50}), 
+        label='Do you have anything to say little user?',
+        required=False
     )
 
     class Meta:
