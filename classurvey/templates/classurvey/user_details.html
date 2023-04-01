@@ -17,4 +17,25 @@
 
 </form>
   
+
+<script>
+  const q1RadioOptions = document.getElementsByName('q1');
+  const numSoundsInputField = document.getElementsByName('q2')[0];
+
+  const setNumSoundsInputVisibility = () => {
+    numSoundsInputField.disabled = !q1RadioOptions[0].checked
+    if (numSoundsInputField.disabled) {
+      numSoundsInputField.value = ''
+    }
+  }
+  
+  setNumSoundsInputVisibility()
+
+  q1RadioOptions.forEach((element) => {
+    element.addEventListener('change', (event) => {
+      setNumSoundsInputVisibility();
+    })
+  })
+</script>
+
 {% endblock content %}
