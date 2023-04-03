@@ -91,6 +91,14 @@ footer {
     height: 60vh;
 }
 
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
 
 /* Responsive styles */
 @media screen and (max-width: 640px) {
