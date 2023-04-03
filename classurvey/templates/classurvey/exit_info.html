@@ -2,12 +2,32 @@
 
 {% block content %}
 
-<form method="post">
-    {% csrf_token %}
+<div class="container-simple">
+    <form method="post" novalidate>
+        {% csrf_token %}
 
-    {{ form }}
-    
-    <input type="submit" class="btn btn-outline-dark btn-sm" value="Submit">
-</form>
+        <fieldset class="card">
+            <div class="card-header">
+                <legend>Exit Form</legend>
+            </div>
+
+            <div class="card-body">
+                {% for field in form %}
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+                {% endfor %}
+
+                <div class="center" style="margin-top: 15px;">
+                    <input type="submit" class="btn btn-success" value="Submit">
+                </div>
+            </div>
+        </fieldset>
+
+
+    </form>
+</div>
 
 {% endblock %}
