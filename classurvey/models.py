@@ -6,6 +6,7 @@ class TestSound(models.Model):
     sound_id = models.CharField(max_length=50)
     sound_class = models.CharField(max_length=50)
     sound_group = models.IntegerField()
+    sound_difficulty = models.CharField(max_length=3)
 
     def __str__(self):
         return f"<TestSound {self.sound_id}>"

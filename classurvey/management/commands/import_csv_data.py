@@ -33,5 +33,6 @@ def import_sounds_csv(file_path):
             sound = TestSound.objects.create(
                 sound_id=row['ID'],
                 sound_class=row['Class'],
-                sound_group=row['Group']
+                sound_group=row['Group'],
+                sound_difficulty=row['Level']
             )
