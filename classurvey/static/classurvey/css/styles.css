@@ -16,7 +16,7 @@ form {
 li a:hover:not(.active) {
     color: white;
     text-decoration: none;
-  }
+}
 
 a {
     color: #090086c0;
@@ -24,6 +24,7 @@ a {
 
 legend {
     text-align: center;
+}
 
 footer {
     color: grey;
