@@ -40,39 +40,6 @@ footer {
 }
 
 
-.button1 {
-    background-color: #d1deec;
-    border-color: #000000;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-.button-main {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.button-main:hover {
-    background-color: #0270e6;
-}
-
-.button-end {
-    margin-top: 10px;
-}
-
-.button-end a:hover {
-    text-decoration: none;
-    color: inherit;
-}
-
 .invisible-link {
     text-decoration: none; 
     color: inherit;
