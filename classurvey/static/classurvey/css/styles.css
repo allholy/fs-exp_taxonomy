@@ -30,13 +30,15 @@ footer {
     margin-top: 100px;
 }
 
+.errorlist li {
+    color: #830a0a;
+    list-style-type: none;
     position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 10px 0 10px;
-    float: none;
-    width: auto;
+    top: 20px;
+    left: -10px;
+    margin-top: -20px;
 }
+
 
 .button1 {
     background-color: #d1deec;
