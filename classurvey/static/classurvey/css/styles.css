@@ -18,6 +18,10 @@ li a:hover:not(.active) {
     text-decoration: none;
   }
 
+a {
+    color: #090086c0;
+}
+
 legend {
     text-align: center;
     background-color: #f5f5f5;
