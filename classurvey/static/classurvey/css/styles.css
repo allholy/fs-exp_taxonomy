@@ -76,7 +76,7 @@ footer {
 .card {
     border: none;
     border-radius: 0;
-    box-shadow: 0 0 10px #0000001a;
+    box-shadow: 0 0 20px #0000001a;
     /* height: 80vh; */
 }
 
@@ -94,6 +94,12 @@ footer {
     margin: auto;
 }
 
+.card.card-details {
+    top: 40px;
+    width: 35%;
+    background-color: #ffffff80;
+}
+
 .card-header.bg-light {
     background-color: #f8f9fa;
     color: #333;
@@ -101,7 +107,12 @@ footer {
 }
 
 .card-header.question {
-    background-color: #f8f8eeee;
+    background-color: #fdfdcdee;
+    padding: 25px;
+}
+
+.card-header.details {
+    background-color: #fffff1ee;
     padding: 25px;
 }
 

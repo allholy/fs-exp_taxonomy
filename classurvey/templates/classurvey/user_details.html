@@ -5,13 +5,17 @@
 <form method="post" novalidate>
 
   {% csrf_token %}
-  <fieldset class="container-start">
-    <legend>User Questions</legend>
+  <fieldset class="card card-details">
+    <div class="card-header details">
+      <legend>User Questions</legend>
+    </div>
 
-    {{ form.as_p}}
-
-    <div style="text-align: center;">
-    <input type="submit" class="btn btn-outline-dark" value="Next">
+    <div class="card-body">
+      {{ form.as_p}}
+      
+      <div class="center">
+        <input type="submit" class="btn btn-outline-dark" value="Next">
+      </div>
     </div>
   </fieldset>
 
