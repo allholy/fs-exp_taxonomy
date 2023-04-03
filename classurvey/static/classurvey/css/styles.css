@@ -39,6 +39,15 @@ footer {
     margin-top: -20px;
 }
 
+.error-class {
+    position: relative;
+    left: 250px;
+    margin-bottom: 20px;
+}
+
+.error-class li:after {
+    content: " Please choose one category.";
+}
 
 .invisible-link {
     text-decoration: none; 
