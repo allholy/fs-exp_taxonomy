@@ -17,7 +17,7 @@ class UserDetailsForm(forms.ModelForm):
 
     class Meta:
         model = UserDetailsModel
-        fields = '__all__'
+        exclude = ['ip_address']
         labels = {
             'q1':'Are you a Freesound user?',
             'q2':'If so, how many sounds have you uploaded (approximately)?',
