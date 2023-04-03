@@ -17,7 +17,6 @@ class SoundAnswer(models.Model):
     user_id = models.CharField(max_length=50)  # random generate
     test_sound = models.ForeignKey(TestSound, on_delete=models.CASCADE)
     date_created = models.DateTimeField('Creation date', auto_now_add=True) #timezone aware
-    #ip_address = models.CharField(max_length=50) 
 
     # NOTE: If you change the keys, you have to be careful 
     # to change them manually in annotate_sound.html file.
@@ -63,11 +62,14 @@ class SoundAnswer(models.Model):
 
 class ExitInfoModel(models.Model):
     answer = models.CharField(max_length=255, null=True, blank=True ,default="")
+    date_created = models.DateTimeField('Creation date', auto_now_add=True)
 
 class UserDetailsModel(models.Model):
+    ip_address = models.GenericIPAddressField(null=True)
     yes_no = (('Y', 'Yes'), ('N', 'No'))
     experience_choices = (('1', 'Nope'), ('2', 'Hobby'), ('3', 'Professional'))
     q1 = models.CharField(max_length=50,choices=yes_no,default="")
     q2 = models.IntegerField(null=True, blank=True)
     q3 = models.CharField(max_length=50,choices=experience_choices,default="")
     q4 = models.CharField(max_length=50,choices=yes_no,default="")
+    date_created = models.DateTimeField('Creation date', auto_now_add=True)
