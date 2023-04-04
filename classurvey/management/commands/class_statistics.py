@@ -16,9 +16,20 @@ class Command(BaseCommand):
 def stats():
     # by class
 
-    data = SoundAnswer.objects.values('test_sound__sound_id','test_sound__sound_class','chosen_class')
+    data = SoundAnswer.objects.values(
+        'test_sound__sound_id','test_sound__sound_class','chosen_class',
+        'user_id'
+    )
+    count = data.count()
+    print(count,data)
+
+    #data.filter(='')
+
     ground_truth = [d['test_sound__sound_class'] for d in data]    
     user_answer = [d['chosen_class'] for d in data]
+
+    user_count = set(d['user_id'] for d in data) # or query .distinct
+    #print(ground_truth,user_answer)
 
     # confusion matrix
     cm = pd.crosstab(ground_truth, user_answer, normalize='index')
