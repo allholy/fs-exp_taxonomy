@@ -25,18 +25,23 @@ def assign_group(request,user_id):
     ''' 
     Assign one group to the user and save it to the session.
     '''
+    # see on the given table how many groups exist
     available_groups = TestSound.objects.values_list('sound_group', flat=True).distinct()
+    # groups done. if it is empty, none are done.
     groups_already_done = SoundAnswer.objects.filter(user_id=user_id).values_list('test_sound__sound_group', flat=True).distinct()
-    print(available_groups, groups_already_done)
+    print(groups_already_done)
 
-    selected_group = request.session.get('group_number', None)
-    if selected_group is None:
+    if not len(groups_already_done) == len(available_groups):
         # TODO: what happenes when they do all? -> remaining_groups
         # i want it to redirect to a page when they press button that says they tested all available sounds.
         remaining_groups = set(available_groups) - set(groups_already_done)
         selected_group = random.choice(list(remaining_groups))
-        request.session['group_number'] = selected_group   
-    return selected_group
+        print(selected_group)
+        request.session['group_number'] = selected_group
+        return selected_group
+    else:
+        print("done")
+        return None
 
 def get_next_sound_for_user(request):
     '''
@@ -44,7 +49,7 @@ def get_next_sound_for_user(request):
     sound until no more sound are remaining. 
     '''
     user_id = user_id_from_request(request)
-    group_number = assign_group(request,user_id)
+    group_number = request.session['group_number']
 
     test_sound_ids_in_group = TestSound.objects.filter(sound_group=group_number).values_list('id', flat=True)
     test_sound_ids_already_answered = SoundAnswer.objects.filter(test_sound_id__in=test_sound_ids_in_group, user_id=user_id).values_list('test_sound_id', flat=True)
@@ -62,7 +67,7 @@ def sounds_sizes(request):
     Returns the total size of sounds and how many are answered already.
     '''
     user_id = user_id_from_request(request)
-    group_number = assign_group(request,user_id)
+    group_number = request.session['group_number']
 
     test_sound_ids_in_group = TestSound.objects.filter(sound_group=group_number).values_list('id', flat=True)
     test_sound_ids_already_answered = SoundAnswer.objects.filter(test_sound_id__in=test_sound_ids_in_group, user_id=user_id).values_list('test_sound_id', flat=True)
