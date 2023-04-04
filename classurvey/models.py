@@ -59,6 +59,8 @@ class SoundAnswer(models.Model):
         ("ss-other", "Other")
     )
     chosen_class = models.CharField(max_length=15, choices=test_choices, default="")
+    likert_choices = ((1, 'Strongly Unconfident'), (2, 'Unconfident'), (3, 'Neutral'), (4, 'Confident'), (5, 'Strongly Confident'))
+    confidence = models.IntegerField(choices=likert_choices,default="")
 
 
 class ExitInfoModel(models.Model):

@@ -54,14 +54,27 @@
                         {{ option }}
                     </div>
                     {% endfor %}
+                </div>     
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="confidence-label">
+                        {{form.confidence.label}}
+                    </div>
+                    <div class="horizontal-radio">
+                        {% for choice in form.confidence %}
+                        {{choice}}
+                        {% endfor %}    
+                    </div>
                 </div>
             </div>
 
             <div class="right">
                 <input type="submit" class="btn btn-outline-dark" value="Next">
             </div>
+        </div>
     </fieldset>
-    </div>
 </form>
 
 

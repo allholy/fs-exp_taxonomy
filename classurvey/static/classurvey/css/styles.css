@@ -82,7 +82,7 @@ footer {
 
 .card.card-question {
     position: absolute;
-    top: 40px;
+    top: 20px;
     width: 50%;
     /* background-color: #ffffffec; */
     background: radial-gradient(circle, #eeedd9 0%, #d2c9fc80 100%);
@@ -146,10 +146,27 @@ footer {
     font-weight: 600;
 }
 
+.confidence-label {
+    text-decoration: underline;
+    margin: 35px 20px 10px 20px;
+}
+
+.horizontal-radio {
+    display: flex;
+}
+
+.horizontal-radio label {
+    margin-right: 30px;
+}
+
+
 /* Responsive styles */
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 1000px) {
     .container {
         max-width: 100%;
         box-shadow: none;
+    }
+    .card.card-question  {
+        width: 70%;
     }
 }

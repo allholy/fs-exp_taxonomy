@@ -6,10 +6,14 @@ class SoundAnswerForm(forms.ModelForm):
 
     class Meta:
         model = SoundAnswer
-        fields = ('chosen_class',)
-        labels = {'chosen_class':'Which is the most suitable category for this sound?'}
+        fields = ('chosen_class', 'confidence')
+        labels = {
+            'chosen_class': 'Which is the most suitable category for this sound?',
+            'confidence': 'How confident are you in your answer?'
+        }
         widgets = {
             'chosen_class': forms.RadioSelect,
+            'confidence': forms.RadioSelect,
         }
 
 
