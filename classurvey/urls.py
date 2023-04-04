@@ -11,4 +11,5 @@ urlpatterns = [
     path('exit-info/', views.exit_info_view, name='exit_info'),
     path('end/', views.end_view, name='end'),
     path('group-end/', views.group_end_view, name='group_end'),
+    path('results/', views.results_view, name='results'),
 ]
