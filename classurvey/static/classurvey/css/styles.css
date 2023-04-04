@@ -42,8 +42,7 @@ footer {
 
 .error-class {
     position: relative;
-    left: 50px;
-    margin-bottom: 20px;
+    margin: 10px;
 }
 
 .error-class li:after {
@@ -52,8 +51,7 @@ footer {
 
 .error-confidence {
     position: relative;
-    left: 50px;
-    margin: -10px;
+    margin: 20px 10px -10px 10px;
 }
 
 .error-confidence li:after {
