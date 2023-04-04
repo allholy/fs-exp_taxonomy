@@ -75,37 +75,45 @@ def sounds_sizes(request):
     return total_sounds_size, answered_sounds_size
 
 
-
 def home_view(request):
     user_id = user_id_from_request(request)
-    group = assign_group(request,user_id)
+    group = assign_group(request, user_id)
     if None == group:
         return redirect(reverse('classurvey:group_end'))
     return render(request, 'classurvey/home.html')
 
+
 def group_end_view(request):
     return render(request, 'classurvey/group_end.html')
+
 
 def instructions_view(request):
     return render(request, 'classurvey/instructions.html')
 
+
 def user_details_view(request):
-    get_ip_address(request)
+    '''
+    Form with user data and ip address.
+    '''
+    ip_address = get_ip_address(request)
+
     if request.method == 'POST':
         form = UserDetailsForm(request.POST)
         if form.is_valid():
-            response = form.save()
+            response = form.save(commit=False)
+            response.ip_address = ip_address
+            response.save()
             return redirect(reverse('classurvey:main'))
     else:
         form = UserDetailsForm()
     return render(request, 'classurvey/user_details.html', {'form': form})
 
-#test one question
+# test one question
 def annotate_sound_view(request):
 
     user_id = user_id_from_request(request)
 
-    all_sounds_size,answered_sounds_size = sounds_sizes(request)
+    all_sounds_size, answered_sounds_size = sounds_sizes(request)
 
     if request.POST:
         form = SoundAnswerForm(request.POST)
