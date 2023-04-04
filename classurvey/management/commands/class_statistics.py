@@ -22,11 +22,15 @@ def stats():
 
     # confusion matrix
     cm = pd.crosstab(ground_truth, user_answer, normalize='index')
-    class_order = [choice[0] for choice in SoundAnswer.test_choices]
-    cm =cm.reindex(index=class_order,columns=class_order,fill_value=0)
+    # remove other from ground truth
+    class_order = [choice[0] for choice in SoundAnswer.test_choices] # order as in choices
+    only_in_gt = [x for x in class_order if not x.endswith("-other")]
+    cm =cm.reindex(index=only_in_gt,columns=class_order,fill_value=0)
 
-    s = sb.heatmap(cm, annot=True, cmap='viridis')
-
-    s.set_ylabel('Ground Truth', fontsize=16)
-    s.set_xlabel('User Answer', fontsize=16)
+    fig, ax = plt.subplots(figsize=(15, 15))
+    s = sb.heatmap(cm, annot=True, cmap='viridis', ax=ax)
+    s.set_ylabel('Ground Truth', fontsize=15)
+    s.set_xlabel('User Answer', fontsize=15)
+    s.set_xticklabels(s.get_xticklabels(), rotation=45)
+    s.set_yticklabels(s.get_yticklabels(), rotation=45)
     plt.show()
