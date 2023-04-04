@@ -42,12 +42,22 @@ footer {
 
 .error-class {
     position: relative;
-    left: 250px;
+    left: 50px;
     margin-bottom: 20px;
 }
 
 .error-class li:after {
     content: " Please choose one category.";
+}
+
+.error-confidence {
+    position: relative;
+    left: 50px;
+    margin: -10px;
+}
+
+.error-confidence li:after {
+    content: " Please choose your confidence level.";
 }
 
 .invisible-link {
