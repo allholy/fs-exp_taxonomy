@@ -93,7 +93,7 @@ def user_details_view(request):
     return render(request, 'classurvey/user_details.html', {'form': form})
 
 #test one question
-def annotate_sound(request):
+def annotate_sound_view(request):
 
     user_id = user_id_from_request(request)
 
@@ -112,7 +112,6 @@ def annotate_sound(request):
 
             print(f'number of answers {SoundAnswer.objects.count()}')
             return redirect(reverse('classurvey:main'))
-
     else:
         form = SoundAnswerForm()
         test_sound = get_next_sound_for_user(request)
