@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
-
 from django.urls import reverse
+
 from .models import SoundAnswer, TestSound
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
-import random
 
+import random
 
 
 def user_id_from_request(request):
@@ -13,6 +13,13 @@ def user_id_from_request(request):
         user_id = 'user_'+ str(random.randint(10,9999999))
         request.session['user_id'] = user_id
     return user_id
+
+def get_ip_address(request):
+    user_ip_address = request.META.get('HTTP_X_FORWARDED_FOR')
+    if user_ip_address:
+        return user_ip_address.split(',')[0]
+    else:
+        return request.META.get('REMOTE_ADDR')
 
 def assign_group(request,user_id):
     ''' 
