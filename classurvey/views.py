@@ -32,15 +32,13 @@ def assign_group(request,user_id):
     print(groups_already_done)
 
     if not len(groups_already_done) == len(available_groups):
-        # TODO: what happenes when they do all? -> remaining_groups
-        # i want it to redirect to a page when they press button that says they tested all available sounds.
         remaining_groups = set(available_groups) - set(groups_already_done)
         selected_group = random.choice(list(remaining_groups))
         print(selected_group)
         request.session['group_number'] = selected_group
         return selected_group
     else:
-        print("done")
+        # when none, redirect to a page that says they tested all sounds.
         return None
 
 def get_next_sound_for_user(request):
@@ -80,8 +78,13 @@ def sounds_sizes(request):
 
 def home_view(request):
     user_id = user_id_from_request(request)
-    assign_group(request,user_id)
+    group = assign_group(request,user_id)
+    if None == group:
+        return redirect(reverse('classurvey:group_end'))
     return render(request, 'classurvey/home.html')
+
+def group_end_view(request):
+    return render(request, 'classurvey/group_end.html')
 
 def instructions_view(request):
     return render(request, 'classurvey/instructions.html')

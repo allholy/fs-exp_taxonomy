@@ -10,4 +10,5 @@ urlpatterns = [
     path('question/',views.annotate_sound_view, name='main'),
     path('exit-info/', views.exit_info_view, name='exit_info'),
     path('end/', views.end_view, name='end'),
+    path('group-end/', views.group_end_view, name='group_end'),
 ]
