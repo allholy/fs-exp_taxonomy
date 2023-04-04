@@ -146,6 +146,13 @@ footer {
     font-weight: 600;
 }
 
+.iframe-layout {
+    width: 102%; 
+    height: 215px; 
+    transform:translateX(-15px) scale(0.85);
+    transform-origin: center;
+}
+
 .confidence-label {
     text-decoration: underline;
     margin: 35px 20px 10px 20px;
@@ -168,5 +175,8 @@ footer {
     }
     .card.card-question  {
         width: 70%;
+    }
+    .iframe-layout {
+        transform:translateX(-30px) scale(0.7);
     }
 }
