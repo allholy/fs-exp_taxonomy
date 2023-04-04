@@ -12,6 +12,11 @@
             <legend>{{ form.chosen_class.label }}</legend>
         </div>
         <div class="card-body">
+
+            <div class="center" style="margin: -15px 0px;">
+                {{ answered_sounds_size }} / {{ all_sounds_size }}
+            </div>
+
             <div class="row">
                 <div class="col-12">
                     <iframe id="encoder_iframe" frameborder="0" scrolling="no"
@@ -69,7 +74,7 @@
                     </div>
                 </div>
             </div>
-
+                
             <div class="right">
                 <input type="submit" class="btn btn-outline-dark" value="Next">
             </div>

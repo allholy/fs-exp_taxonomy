@@ -31,13 +31,6 @@ def assign_group(request,user_id):
         request.session['group_number'] = selected_group   
     return selected_group
 
-
-def home_view(request):
-    user_id = user_id_from_request(request)
-    assign_group(request,user_id)
-    return render(request, 'classurvey/home.html')
-
-
 def get_next_sound_for_user(request):
     '''
     Retrieve the sounds that belong to a group and each time return one random
@@ -57,11 +50,47 @@ def get_next_sound_for_user(request):
         next_sound = random.choice(remaining_sounds)
         return next_sound
 
+def sounds_sizes(request):
+    '''
+    Returns the total size of sounds and how many are answered already.
+    '''
+    user_id = user_id_from_request(request)
+    group_number = assign_group(request,user_id)
+
+    test_sound_ids_in_group = TestSound.objects.filter(sound_group=group_number).values_list('id', flat=True)
+    test_sound_ids_already_answered = SoundAnswer.objects.filter(test_sound_id__in=test_sound_ids_in_group, user_id=user_id).values_list('test_sound_id', flat=True)
+    
+    total_sounds_size = len(test_sound_ids_in_group)
+    answered_sounds_size = len(test_sound_ids_already_answered)
+    return total_sounds_size, answered_sounds_size
+
+
+
+def home_view(request):
+    user_id = user_id_from_request(request)
+    assign_group(request,user_id)
+    return render(request, 'classurvey/home.html')
+
+def instructions_view(request):
+    return render(request, 'classurvey/instructions.html')
+
+def user_details_view(request):
+    get_ip_address(request)
+    if request.method == 'POST':
+        form = UserDetailsForm(request.POST)
+        if form.is_valid():
+            response = form.save()
+            return redirect(reverse('classurvey:main'))
+    else:
+        form = UserDetailsForm()
+    return render(request, 'classurvey/user_details.html', {'form': form})
 
 #test one question
 def annotate_sound(request):
 
     user_id = user_id_from_request(request)
+
+    all_sounds_size,answered_sounds_size = sounds_sizes(request)
 
     if request.POST:
         form = SoundAnswerForm(request.POST)
@@ -83,21 +112,10 @@ def annotate_sound(request):
         if test_sound is None:
             return redirect(reverse('classurvey:exit_info'))
 
-    return render(request, 'classurvey/annotate_sound.html', {'test_sound': test_sound, 'form': form})
-
-
-def instructions_view(request):
-    return render(request, 'classurvey/instructions.html')
-
-def user_details_view(request):
-    if request.method == 'POST':
-        form = UserDetailsForm(request.POST)
-        if form.is_valid():
-            response = form.save()
-            return redirect(reverse('classurvey:main'))
-    else:
-        form = UserDetailsForm()
-    return render(request, 'classurvey/user_details.html', {'form': form})
+    return render(request, 'classurvey/annotate_sound.html', {
+        'test_sound': test_sound, 'form': form,
+        'all_sounds_size': all_sounds_size, 'answered_sounds_size': answered_sounds_size,
+        })
 
 def exit_info_view(request):
     if request.method == 'POST':
