@@ -117,13 +117,18 @@ def user_details_view(request):
     if request.method == 'POST':
         form = UserDetailsForm(request.POST)
         if form.is_valid():
+            request.session['user_details'] = form.cleaned_data
+            request.session.save()
+
             response = form.save(commit=False)
             response.ip_address = ip_address
             response.user_id = request.session['user_id']
             response.save()
             return redirect(reverse('classurvey:main'))
     else:
-        form = UserDetailsForm()
+        # store user details to prefill
+        stored_user_details = request.session.get('user_details', None)
+        form = UserDetailsForm(initial=stored_user_details)
     return render(request, 'classurvey/user_details.html', {'form': form})
 
 # test one question
