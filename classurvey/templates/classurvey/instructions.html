@@ -8,11 +8,39 @@
             <h1>Basic Instructions</h1>
         </div>
         <div class="card-body">
-            <p>Instructions here.....blah blah blah</p>
-            <form action="{% url 'classurvey:user_details' %}">
-                {% csrf_token %}
-                <button type="submit" class="button-main">Continue</button>
-            </form>
+            <h4>Description:</h4>
+            <p>
+                We are introducing a new <a href="https://en.wikipedia.org/wiki/Taxonomy"
+                    style="color: black;">taxonomy</a> for Freesound. The proposed categories are introduced into ths
+                experiment.....
+            </p>
+
+            <h4>Information:</h4>
+            <p>
+                This is a listening test that takes around 15 minutes.
+                It is preferable to be located in a quiet environment.
+                We kindly request you to finish and submit the results, otherwise the answers won't be commited.
+            </p>
+
+            You will be assigned with a group of around 20 sounds. You are asked to listen one by one and choose the
+            best category for each one.
+            <ul>
+                <li>Each sound can be assigned to only one category.</li>
+                <li>Multiple categories can be assigned.</li>
+                <li>lalal</li>
+            </ul>
+
+            <footer>
+                This research is carried by Universitat Pompeu Fabra for the evaluation of new potential features on
+                Freesound.
+                Contact us on <a href="mailto:panagiota.anastasopoulou@upf.edu">panagiota.anastasopoulou@upf.edu</a>
+                or <a href="mailto:frederic.font@upf.edu">frederic.font@upf.edu</a> for any technical problems or
+                questions...
+            </footer>
+
+            <div style="text-align: center">
+                <a href="{% url 'classurvey:user_details' %}" class="btn btn-primary">Continue</a>
+            </div>
         </div>
     </div>
 </div>
