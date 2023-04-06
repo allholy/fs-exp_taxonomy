@@ -21,7 +21,7 @@ class UserDetailsForm(forms.ModelForm):
 
     class Meta:
         model = UserDetailsModel
-        exclude = ['ip_address']
+        exclude = ['user_id','ip_address']
         labels = {
             'q1':'Are you a Freesound user?',
             'q2':'If so, how many sounds have you uploaded (approximately)?',
@@ -45,4 +45,4 @@ class ExitInfoForm(forms.ModelForm):
 
     class Meta:
         model = ExitInfoModel
-        fields = ('answer',)
+        exclude = ['user_id']

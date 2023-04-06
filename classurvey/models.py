@@ -40,16 +40,22 @@ class SoundAnswer(models.Model):
     confidence = models.IntegerField(choices=likert_choices,default="")
 
 
-class ExitInfoModel(models.Model):
-    answer = models.CharField(max_length=255, null=True, blank=True ,default="")
-    date_created = models.DateTimeField('Creation date', auto_now_add=True)
-
 class UserDetailsModel(models.Model):
+    user_id = models.CharField(max_length=50) #, unique=True
     ip_address = models.GenericIPAddressField(null=True)
+
     yes_no = (('Y', 'Yes'), ('N', 'No'))
     experience_choices = (('1', 'Nope'), ('2', 'Hobby'), ('3', 'Professional'))
     q1 = models.CharField(max_length=50,choices=yes_no,default="")
     q2 = models.IntegerField(null=True, blank=True)
     q3 = models.CharField(max_length=50,choices=experience_choices,default="")
     q4 = models.CharField(max_length=50,choices=yes_no,default="")
+    date_created = models.DateTimeField('Creation date', auto_now_add=True)
+
+
+class ExitInfoModel(models.Model):
+    # user_id = models.ForeignKey(UserDetailsModel, on_delete=models.CASCADE, to_field='user_id')
+    user_id = models.CharField(max_length=50)
+
+    answer = models.CharField(max_length=255, null=True, blank=True ,default="")
     date_created = models.DateTimeField('Creation date', auto_now_add=True)

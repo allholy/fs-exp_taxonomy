@@ -37,7 +37,6 @@ def assign_group(request, user_id):
     if not len(groups_already_done) == len(available_groups):
         remaining_groups = set(available_groups) - set(groups_already_done)
         selected_group = random.choice(list(remaining_groups))
-        print(selected_group)
         request.session['group_number'] = selected_group
         return selected_group
     else:
@@ -128,6 +127,7 @@ def user_details_view(request):
         if form.is_valid():
             response = form.save(commit=False)
             response.ip_address = ip_address
+            response.user_id = request.session['user_id']
             response.save()
             return redirect(reverse('classurvey:main'))
     else:
@@ -150,9 +150,8 @@ def annotate_sound_view(request):
             sound_answer.test_sound_id = request.POST.get('test_sound_id')
             sound_answer.user_id = user_id
             sound_answer.save()
-            # redirect to next sound
 
-            print(f'number of answers {SoundAnswer.objects.count()}')
+            # print(f'number of answers {SoundAnswer.objects.count()}')
             return redirect(reverse('classurvey:main'))
     else:
         form = SoundAnswerForm()
@@ -170,7 +169,9 @@ def exit_info_view(request):
     if request.method == 'POST':
         form = ExitInfoForm(request.POST)
         if form.is_valid():
-            response = form.save()
+            response = form.save(commit=False)
+            response.user_id = request.session['user_id']
+            response.save()
             return redirect(reverse('classurvey:end'))
     else:
         form = ExitInfoForm()
