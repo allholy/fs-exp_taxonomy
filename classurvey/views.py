@@ -41,7 +41,7 @@ def assign_group(request, user_id):
         return selected_group
     else:
         # when none, redirect to a page that says they tested all sounds.
-        return None
+        return 'done'
 
 def get_next_sound_for_user(request):
     '''
@@ -86,7 +86,7 @@ def sounds_sizes(request):
 def home_view(request):
     user_id = user_id_from_request(request)
     group = assign_group(request, user_id)
-    if None == group:
+    if 'done' == group:
         return redirect(reverse('classurvey:group_end'))
     return render(request, 'classurvey/home.html')
 
