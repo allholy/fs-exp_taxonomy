@@ -99,6 +99,23 @@ def group_end_view(request):
 def instructions_view(request):
     return render(request, 'classurvey/instructions.html')
 
+import csv
+def load_classes_from_csv(csv_file):
+    with open(csv_file, 'r') as f:
+        reader = csv.DictReader(f)
+        topclasses = {}
+        for row in reader:
+            topclass = row['TopClass']
+            subclass = row['ClassName']
+            if topclass not in topclasses:
+                topclasses[topclass] = []
+            topclasses[topclass].append(subclass)
+    return topclasses
+
+def taxonomy_view(request):
+    classes = load_classes_from_csv('classurvey/data/choices.csv')
+    print(classes)
+    return render(request, 'classurvey/taxonomy.html', {'classes': classes})
 
 def user_details_view(request):
     '''
