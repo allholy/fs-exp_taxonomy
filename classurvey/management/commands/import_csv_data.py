@@ -1,12 +1,12 @@
-from django.core.management.base import BaseCommand, CommandError
-from classurvey.models import TestSound
+from django.core.management.base import BaseCommand
+from classurvey.models import TestSound, ClassChoice
 
 import csv
 import os
 
-# path of data file as an argument
-# your databse in a csv
+
 class Command(BaseCommand):
+    # The data is in csv file. Its path is an argument.
     help = 'Path for file with data about the test sounds.'
 
     def add_arguments(self, parser):
@@ -20,11 +20,16 @@ class Command(BaseCommand):
             
         self.stdout.write(self.style.SUCCESS(f"Importing data from '{path}'."))
 
-        import_sounds_csv(path)
+        # Comment out the one you want (for now)
+        #import_sounds_csv(path)
+        import_classes_csv(path)
 
 
-# import data
+
 def import_sounds_csv(file_path):
+    '''
+    Import sound data from csv file.
+    '''
     #NOTE: remember to delete all existing data before re-upload
     #TestSound.objects.all().delete
     with open(file_path, newline='') as csvfile:
@@ -34,5 +39,22 @@ def import_sounds_csv(file_path):
                 sound_id=row['ID'],
                 sound_class=row['Class'],
                 sound_group=row['Group'],
-                sound_difficulty=row['Level']
+                sound_difficulty=row['Level'],
+            )
+
+
+def import_classes_csv(file_path):
+    '''
+    Import the classes data from csv file.
+    '''
+    #ClassChoice.objects.all().delete
+    with open(file_path, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            sound,_ = ClassChoice.objects.get_or_create(
+                class_key=row['ClassKey'],
+                class_name=row['ClassName'],
+                top_level=row['TopLevel'],
+                description=row['Description'],
+                examples=row['Examples'],
             )

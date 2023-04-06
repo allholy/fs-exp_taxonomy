@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import SoundAnswer, TestSound
+from .models import SoundAnswer, TestSound, ClassChoice
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
 
 import random
@@ -98,23 +98,15 @@ def group_end_view(request):
 def instructions_view(request):
     return render(request, 'classurvey/instructions.html')
 
-import csv
-def load_classes_from_csv(csv_file):
-    with open(csv_file, 'r') as f:
-        reader = csv.DictReader(f)
-        topclasses = {}
-        for row in reader:
-            topclass = row['TopClass']
-            subclass = row['ClassName']
-            if topclass not in topclasses:
-                topclasses[topclass] = []
-            topclasses[topclass].append(subclass)
-    return topclasses
 
 def taxonomy_view(request):
-    classes = load_classes_from_csv('classurvey/data/choices.csv')
-    print(classes)
-    return render(request, 'classurvey/taxonomy.html', {'classes': classes})
+    top_levels = ClassChoice.objects.values_list('top_level',flat=True).distinct()
+    level_group = {}
+    for top_level in top_levels:
+        rows = ClassChoice.objects.filter(top_level=top_level)
+        level_group[top_level] = list(rows)    
+    print(level_group)
+    return render(request, 'classurvey/taxonomy.html', {'level_group': level_group})
 
 def user_details_view(request):
     '''

@@ -12,29 +12,32 @@ class TestSound(models.Model):
         return f"<TestSound {self.sound_id}>"
 
 
-# store input data for sounds
-import csv
-def csv_to_tuple_choices(csv_file):
-    '''
-    Import test choices (key and display name) from csv file.
-    '''
-    with open(csv_file, 'r') as f:
-        reader = csv.reader(f)
-        labels = next(reader)
-        data = [(row[0], row[1]) for row in reader]
-    tuple_choices = tuple(data)
-    return(tuple_choices)
+class ClassChoice(models.Model):
+    class_key = models.CharField(max_length=10)
+    class_name = models.CharField(max_length=50)
+    top_level = models.CharField(max_length=20)
+    description = models.CharField(max_length=255, null=True)
+    examples = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return f"<ClassChoice {self.class_name}>"
+    
+def get_test_choices():
+    ''' Import choices and put them in a tuple.'''
+    test_choices = ClassChoice.objects.values_list(
+        'class_key', 'class_name')
+    test_choices = tuple(test_choices)
+    return test_choices
 
 class SoundAnswer(models.Model):
     user_id = models.CharField(max_length=50)  # random generate
     test_sound = models.ForeignKey(TestSound, on_delete=models.CASCADE)
     date_created = models.DateTimeField('Creation date', auto_now_add=True) #timezone aware
 
-    # NOTE: If you change the keys, you have to be careful 
+    # NOTE: If you change the keys, you have to be careful
     # to change them manually in annotate_sound.html file.
+    test_choices = get_test_choices() # available choices
 
-    # available choices
-    test_choices = csv_to_tuple_choices('classurvey/data/choices.csv')
     chosen_class = models.CharField(max_length=15, choices=test_choices, default="")
     likert_choices = ((1, 'Strongly Unconfident'), (2, 'Unconfident'), (3, 'Neutral'), (4, 'Confident'), (5, 'Strongly Confident'))
     confidence = models.IntegerField(choices=likert_choices,default="")
