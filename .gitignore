@@ -4,3 +4,5 @@ db.sqlite3
 **/migrations/
 
 classurvey/data/
+
+.env
