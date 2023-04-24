@@ -9,6 +9,7 @@ import random
 
 
 def user_id_from_request(request):
+    ''' Generate random user id. '''
     user_id = request.session.get('user_id', None)
     if user_id is None:
         user_id = 'user_' + str(random.randint(10, 9999999))
@@ -49,6 +50,7 @@ def assign_group(request, user_id):
         'test_sound__sound_group', flat=True).distinct()
     print(groups_already_done)
 
+    # check if all groups are done. 
     if not len(groups_already_done) == len(available_groups):
         remaining_groups = set(available_groups) - set(groups_already_done)
         selected_group = random.choice(list(remaining_groups))
@@ -102,14 +104,11 @@ def home_view(request):
         return redirect(reverse('classurvey:group_end'))
     return render(request, 'classurvey/home.html')
 
-
 def group_end_view(request):
     return render(request, 'classurvey/group_end.html')
 
-
 def instructions_view(request):
     return render(request, 'classurvey/instructions.html')
-
 
 def taxonomy_view(request):
     top_levels = ClassChoice.objects.values_list('top_level',flat=True).distinct()
@@ -117,7 +116,6 @@ def taxonomy_view(request):
     for top_level in top_levels:
         rows = ClassChoice.objects.filter(top_level=top_level)
         level_group[top_level] = list(rows)    
-    print(level_group)
     return render(request, 'classurvey/taxonomy.html', {'level_group': level_group})
 
 def user_details_view(request):
