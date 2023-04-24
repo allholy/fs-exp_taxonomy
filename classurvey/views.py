@@ -149,14 +149,16 @@ def annotate_sound_view(request):
     user_id = user_id_from_request(request)
 
     all_sounds_size, answered_sounds_size = sounds_sizes(request)
+    current_sound_number = answered_sounds_size + 1
 
     if request.POST:
         form = SoundAnswerForm(request.POST)
+
         test_sound = TestSound.objects.get(id=request.POST.get('test_sound_id'))
 
         if form.is_valid():
             sound_answer = form.save(commit=False)
-            sound_answer.test_sound_id = request.POST.get('test_sound_id')
+            sound_answer.test_sound_id = request.POST.get('test_sound_id') # sound id_not FS id
             sound_answer.user_id = user_id
             sound_answer.save()
 
@@ -171,7 +173,7 @@ def annotate_sound_view(request):
 
     return render(request, 'classurvey/annotate_sound.html', {
         'test_sound': test_sound, 'form': form,
-        'all_sounds_size': all_sounds_size, 'answered_sounds_size': answered_sounds_size,
+        'all_sounds_size': all_sounds_size, 'answered_sounds_size': current_sound_number,
     })
 
 def exit_info_view(request):
