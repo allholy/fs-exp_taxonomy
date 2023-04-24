@@ -15,6 +15,21 @@ def user_id_from_request(request):
         request.session['user_id'] = user_id
     return user_id
 
+def make_sound_order(request):
+    group_number = request.session['group_number']
+
+    # retrieve sound ids for one group
+    test_sound_ids_in_group = TestSound.objects.filter(sound_group=group_number).values_list('id', flat=True)
+
+    sound_order = request.session.get('sound_order', None)
+    if sound_order is None:
+        sound_order = list(test_sound_ids_in_group)
+        random.shuffle(sound_order)
+
+        request.session['sound_order'] = sound_order
+        print(request.session['sound_order'])
+    return sound_order
+
 def get_ip_address(request):
     user_ip_address = request.META.get('HTTP_X_FORWARDED_FOR')
     if user_ip_address:
@@ -50,21 +65,18 @@ def get_next_sound_for_user(request):
     '''
     user_id = user_id_from_request(request)
     group_number = request.session['group_number']
-
-    test_sound_ids_in_group = TestSound.objects.filter(
-        sound_group=group_number).values_list('id', flat=True)
+    ordered_sound_ids = make_sound_order(request)
+    # unique answered sounds
     test_sound_ids_already_answered = SoundAnswer.objects.filter(
-        test_sound_id__in=test_sound_ids_in_group, user_id=user_id).values_list('test_sound_id', flat=True)
-
-    remaining_sounds = TestSound.objects.filter(
-        sound_group=group_number).exclude(id__in=test_sound_ids_already_answered)
-
-    if not remaining_sounds:
+        test_sound_id__in=ordered_sound_ids, user_id=user_id, test_sound__sound_group=int(group_number)).values_list(
+        'test_sound_id', flat=True).distinct()
+    current_sound_index = len(ordered_sound_ids) - len(test_sound_ids_already_answered) 
+    if 0 == current_sound_index:
         return None
     else:
-        next_sound = random.choice(remaining_sounds)
+        next_sound_id = ordered_sound_ids[current_sound_index-1]
+        next_sound = TestSound.objects.get(id=next_sound_id)
         return next_sound
-
 
 def sounds_sizes(request):
     '''
