@@ -28,7 +28,7 @@ legend {
 
 footer {
     color: grey;
-    margin-top: 100px;
+    margin: 10px 0px;
 }
 
 .errorlist li {
@@ -186,6 +186,9 @@ footer {
 }
 
 
+.checkbox {
+    margin-top: 50px;
+}
 
 .titles {
     font-size: 15pt;
