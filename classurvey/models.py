@@ -7,7 +7,8 @@ class TestSound(models.Model):
     sound_class = models.CharField(max_length=50)
     sound_group = models.IntegerField()
     sound_difficulty = models.CharField(max_length=3)
-
+    sound_name = models.CharField(max_length=150)
+    
     def __str__(self):
         return f"<TestSound {self.sound_id}>"
 

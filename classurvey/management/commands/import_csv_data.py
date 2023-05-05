@@ -31,16 +31,18 @@ def import_sounds_csv(file_path):
     Import sound data from csv file.
     '''
     #NOTE: remember to delete all existing data before re-upload
-    #TestSound.objects.all().delete
+    #TestSound.objects.all().delete()
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            sound = TestSound.objects.create(
+            sound, created = TestSound.objects.get_or_create(
                 sound_id=row['ID'],
                 sound_class=row['Class'],
                 sound_group=row['Group'],
-                sound_difficulty=row['Level'],
+                sound_difficulty=row['Level']
             )
+            sound.sound_name=row['FileName']
+            sound.save()
 
 
 def import_classes_csv(file_path):
