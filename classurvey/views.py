@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.utils import timezone
 
 from .models import SoundAnswer, TestSound, ClassChoice, get_test_descriptions
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
@@ -55,6 +56,7 @@ def assign_group(request, user_id):
         remaining_groups = set(available_groups) - set(groups_already_done)
         selected_group = random.choice(list(remaining_groups))
         request.session['group_number'] = selected_group
+        print(selected_group)
         return selected_group
     else:
         # when none, redirect to a page that says they tested all sounds.
@@ -155,19 +157,28 @@ def annotate_sound_view(request):
         test_sound = TestSound.objects.get(id=request.POST.get('test_sound_id'))
 
         if form.is_valid():
-            sound_answer = form.save(commit=False)
-            sound_answer.test_sound_id = request.POST.get('test_sound_id') # sound id_not FS id
-            sound_answer.user_id = user_id
-            sound_answer.save()
-
+            existing_sound_answer = SoundAnswer.objects.filter(test_sound=test_sound, user_id=user_id)
+            if existing_sound_answer:
+                existing_sound_answer = existing_sound_answer[0]
+                existing_sound_answer.date_created = timezone.now()
+                existing_sound_answer.chosen_class = form.cleaned_data['chosen_class']
+                existing_sound_answer.confidence = form.cleaned_data['confidence']
+                existing_sound_answer.save()
+            else: 
+                sound_answer = form.save(commit=False)
+                sound_answer.test_sound_id = request.POST.get('test_sound_id') # sound id_not FS id
+                sound_answer.user_id = user_id
+                sound_answer.save()
             # print(f'number of answers {SoundAnswer.objects.count()}')
             return redirect(reverse('classurvey:main'))
     else:
-        form = SoundAnswerForm()
+
         test_sound = get_next_sound_for_user(request)
-        # request.session['next_sound'] = test_sound
         if test_sound is None:
             return redirect(reverse('classurvey:exit_info'))
+        form = SoundAnswerForm()
+        # request.session['next_sound'] = test_sound
+
 
     return render(request, 'classurvey/annotate_sound.html', {
         'test_sound': test_sound, 'form': form,
