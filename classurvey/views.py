@@ -201,6 +201,8 @@ def exit_info_view(request):
 def end_view(request):
     return render(request, 'classurvey/end_page.html')
 
+def informed_consent_view(request):
+    return render(request, 'classurvey/informed_consent.html')
 
 @login_required
 def results_view(request):

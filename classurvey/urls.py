@@ -13,4 +13,5 @@ urlpatterns = [
     path('end/', views.end_view, name='end'),
     path('group-end/', views.group_end_view, name='group_end'),
     path('results/', views.results_view, name='results'),
+    path('informed-consent/', views.informed_consent_view, name='informed_consent'),
 ]

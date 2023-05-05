@@ -186,6 +186,10 @@ footer {
 }
 
 
+
+.titles {
+    font-size: 15pt;
+}
 /* Responsive styles */
 @media screen and (max-width: 1000px) {
     .container {
