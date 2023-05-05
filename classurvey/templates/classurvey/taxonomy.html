@@ -6,6 +6,10 @@
     <div class="card">
         <div class="card-header bg-light">
             <h1>Taxonomy</h1>
+            <p class="center">
+                Get familiar with the taxonomy for around 2 minutes before you start the categorization. </br>
+                During the experiment you can hover over the categories' names to display a brief explanation of the category.
+            </p>
         </div>
         <div class="card-body">
             <div class="container">
@@ -16,8 +20,8 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="list-unstyled">
-                            {% for field in class_data %}
-                            <li title="{{ field.description }}">{{ field.class_name }} ({{ field.examples }})</li>
+                            {% for subclass in class_data %}
+                            <li title="{{ subclass.description }}">{{ subclass.class_name }} ({{ subclass.examples }})</li>
                             {% endfor %}
                         </ul>
                     </div>

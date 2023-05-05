@@ -7,33 +7,32 @@
 <form method="post" novalidate autocomplete="off">
     {% csrf_token %}
     <input type="hidden" name="test_sound_id" value="{{ test_sound.id }}">
-
+    
     <fieldset class="card card-question">
         <div class="card-header question">
             <legend>{{ form.chosen_class.label }}</legend>
         </div>
         <div class="card-body">
-
+            
             <div class="center" style="margin: -15px 0px;">
                 {{ answered_sounds_size }} / {{ all_sounds_size }}
             </div>
-
+            
             <div class="row">
                 <div class="col-12">
-                    <iframe id="encoder_iframe" frameborder="0" scrolling="no"
-                        src="https://freesound.org/embed/sound/iframe/{{ test_sound.sound_id }}/simple/large_no_info/"
-                        class="iframe-layout">
-                    </iframe>
-                </div>
+                    <iframe id="encoder_iframe" frameborder="0" scrolling="yes"
+                    class="iframe-layout">
+                </iframe>
             </div>
-
-            <div class="row">
-                <div class="error-class">
-                    {{ form.chosen_class.errors }}
-                </div>
-                {% for option in form.chosen_class %}
-                {% if option.data.value == "m-sp" %}
-                <div class="col-12 col-lg-6">
+        </div>
+        
+        <div class="row">
+            <div class="error-class">
+                {{ form.chosen_class.errors }}
+            </div>
+            {% for option in form.chosen_class %}
+            {% if option.data.value == "m-sp" %}
+            <div class="col-12 col-lg-6">
                     <div class="topclass-names">
                         MUSIC
                     </div>
@@ -78,10 +77,14 @@
                     </div>
                 </div>
             </div>
-                
+            
             <div class="right">
                 <input type="submit" class="btn btn-outline-dark" value="Next">
             </div>
+        </div>
+        <div class="card-footer tip">
+            Tip: Remember you can hover over the categories to see their decription! </br>
+            Tip: If you select "other", be careful to choose the correct top-level category.
         </div>
     </fieldset>
 </form>
