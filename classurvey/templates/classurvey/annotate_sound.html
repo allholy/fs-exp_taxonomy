@@ -1,4 +1,5 @@
 {% extends 'classurvey/base.html' %}
+{% load dict_key %}
 
 {% block content %}
 
@@ -55,7 +56,7 @@
                         SOUNDSCAPES
                     </div>
                     {% endif %}
-                    <div class="myradio">
+                    <div class="myradio" title='{{ class_titles|dict_key:option.data.value }}'>
                         {{ option }}
                     </div>
                     {% endfor %}

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import SoundAnswer, TestSound, ClassChoice
+from .models import SoundAnswer, TestSound, ClassChoice, get_test_descriptions
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
 
 import random
@@ -172,6 +172,7 @@ def annotate_sound_view(request):
     return render(request, 'classurvey/annotate_sound.html', {
         'test_sound': test_sound, 'form': form,
         'all_sounds_size': all_sounds_size, 'answered_sounds_size': current_sound_number,
+        'class_titles': {class_key:f'{class_description} ({class_example})' for class_key, class_description, class_example in get_test_descriptions()}
     })
 
 def exit_info_view(request):

@@ -21,7 +21,12 @@ class ClassChoice(models.Model):
 
     def __str__(self):
         return f"<ClassChoice {self.class_name}>"
-    
+
+def get_test_descriptions():
+    test_choices = ClassChoice.objects.values_list(
+        'class_key', 'description', 'examples')
+    return test_choices
+
 def get_test_choices():
     ''' Import choices and put them in a tuple.'''
     test_choices = ClassChoice.objects.values_list(
