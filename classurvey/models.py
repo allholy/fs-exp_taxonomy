@@ -54,11 +54,11 @@ class UserDetailsModel(models.Model):
     ip_address = models.GenericIPAddressField(null=True)
 
     yes_no = (('Y', 'Yes'), ('N', 'No'))
-    experience_choices = (('1', 'Nope'), ('2', 'Hobby'), ('3', 'Professional'))
+    experience_choices = (('1', 'No'), ('2', 'Hobby'), ('3', 'Professional'))
     q1 = models.CharField(max_length=50,choices=yes_no,default="")
     q2 = models.IntegerField(null=True, blank=True)
     q3 = models.CharField(max_length=50,choices=experience_choices,default="")
-    q4 = models.CharField(max_length=50,choices=yes_no,default="")
+    q4 = models.CharField(max_length=50,choices=experience_choices,default="")
     date_created = models.DateTimeField('Creation date', auto_now_add=True)
 
 

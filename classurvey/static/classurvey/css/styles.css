@@ -75,7 +75,7 @@ footer {
 }
 
 .container-instructions {
-    padding: 3vh;
+    padding: 20px;
     width: 70%;
     margin: auto;
 }
@@ -101,9 +101,9 @@ footer {
     margin: auto;
 }
 
-.card.card-details {
-    top: 40px;
-    width: 35%;
+.card.card-details { /* demographic and feedback */
+    top: 20px;
+    width: 50%;
     background-color: #ffffff80;
 }
 
@@ -119,12 +119,16 @@ footer {
 }
 
 .card-header.details {
-    background-color: #fffff1ee;
+    background-color: #f8f8d3ee;
     padding: 25px;
 }
 
 .card-body {
     padding: 30px;
+}
+
+.card-body2 {
+    padding: 40px 60px;
 }
 
 .card-footer {
@@ -223,10 +227,20 @@ footer {
         max-width: 100%;
         box-shadow: none;
     }
+
     .card.card-question  {
         width: 70%;
     }
+
     .iframe-layout {
         transform:translateX(-30px) scale(0.7);
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .card.card-details {
+        top: 40px;
+        width: 70%;
+        background-color: #ffffff80;
     }
 }
