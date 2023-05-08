@@ -11,9 +11,9 @@
                 <legend>Exit Form</legend>
             </div>
 
-            <div class="card-body">
+            <div class="card-body2">
                 {% for field in form %}
-                <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="box-feedback" style="margin-top: 35px;">
                     {{ field.errors }}
                     {{ field.label_tag }}
                     {{ field }}

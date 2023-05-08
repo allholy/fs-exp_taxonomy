@@ -38,7 +38,7 @@ class UserDetailsForm(forms.ModelForm):
 
 class ExitInfoForm(forms.ModelForm):
     answer = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 5, 'cols': 50}), 
+        widget=forms.Textarea(attrs={'class': 'textarea'}), 
         label='Do you have anything to say little user?',
         required=False
     )
