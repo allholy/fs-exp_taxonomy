@@ -3,43 +3,41 @@
 {% block content %}
 
 <form method="post" novalidate>
+    {% csrf_token %}
+    <fieldset class="card card-details">
+        <div class="card-header details">
+            <legend>Demographic questions</legend>
+        </div>
 
-  {% csrf_token %}
-  <fieldset class="card card-details">
-    <div class="card-header details">
-      <legend>Demographic questions</legend>
-    </div>
+        <div class="card-body2">
+            {{ form.as_p}}
 
-    <div class="card-body2">
-      {{ form.as_p}}
-      
-      <div class="center">
-        <input type="submit" class="btn btn-outline-dark" value="Next">
-      </div>
-    </div>
-  </fieldset>
-
+            <div class="center">
+                <input type="submit" class="btn btn-outline-dark" value="Next">
+            </div>
+        </div>
+    </fieldset>
 </form>
 
 
 <script>
-  const q1RadioOptions = document.getElementsByName('q1');
-  const numSoundsInputField = document.getElementsByName('q2')[0];
+    const q1RadioOptions = document.getElementsByName('q1');
+    const numSoundsInputField = document.getElementsByName('q2')[0];
 
-  const setNumSoundsInputVisibility = () => {
-    numSoundsInputField.disabled = !q1RadioOptions[0].checked
-    if (numSoundsInputField.disabled) {
-      numSoundsInputField.value = ''
+    const setNumSoundsInputVisibility = () => {
+        numSoundsInputField.disabled = !q1RadioOptions[0].checked
+        if (numSoundsInputField.disabled) {
+            numSoundsInputField.value = ''
+        }
     }
-  }
-  
-  setNumSoundsInputVisibility()
 
-  q1RadioOptions.forEach((element) => {
-    element.addEventListener('change', (event) => {
-      setNumSoundsInputVisibility();
+    setNumSoundsInputVisibility()
+
+    q1RadioOptions.forEach((element) => {
+        element.addEventListener('change', (event) => {
+            setNumSoundsInputVisibility();
+        })
     })
-  })
 </script>
 
 {% endblock content %}
