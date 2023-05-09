@@ -209,6 +209,10 @@ footer {
     font-size: 15pt;
 }
 
+.examples {
+    color: rgb(92, 22, 150);
+}
+
 .textarea {
     width: 90%;
     height: 200px;

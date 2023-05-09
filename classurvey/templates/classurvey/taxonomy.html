@@ -6,30 +6,64 @@
     <div class="card">
         <div class="card-header bg-light">
             <h1>Taxonomy</h1>
-            <p class="center">
-                Get familiar with the taxonomy for around 2 minutes before you start the categorization. </br>
-                During the experiment you can hover over the categories' names to display a brief explanation of the category.
-            </p>
+            <div class="center">
+                Get familiar with the taxonomy for around <u>2-3 minutes</u> before you start the categorization. </br>
+                During the experiment you can <u>hover</u> over the categories' names to display a brief explanation of the category.
+            </div>  
         </div>
+
         <div class="card-body">
             <div class="container">
-                {% for top_level, class_data in level_group.items %}
-                <div class="row">
-                    <div class="col-md-4 d-flex align-items-center">
-                        <h3>{{ top_level }}</h3>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="list-unstyled">
-                            {% for subclass in class_data %}
-                            <li title="{{ subclass.description }}">{{ subclass.class_name }} ({{ subclass.examples }})</li>
-                            {% endfor %}
-                        </ul>
+                <div class="d-none d-md-block titles">
+                    <div class="row">
+                        <div class="col-md-3 d-flex align-items-center">
+                            Top-level category
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Sub category
+                                </div>
+                                <div class="col-md-8">
+                                    Definition and examples
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <hr>
+                <hr style="border: 2px solid rgb(20, 10, 40);">
+
+                {% for top_level, class_data in level_group.items %}
+                <div class="row">
+                    <div class="col-md-3 d-flex align-items-center">
+                        <h3>{{ top_level }}</h3>
+                    </div>
+                    <div class="col-md-9"> 
+                        {% for subclass in class_data %}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span class="d-md-none">* </span><span title="{{ subclass.description}} ({{ subclass.examples }})">{{ subclass.class_name }} </span>
+                            </div>
+                            <div class="col-md-8">
+                                <div>
+                                    {{ subclass.description }}
+                                </div>
+                                <div class="examples">
+                                    {% if subclass.examples != "" %}
+                                        ({{ subclass.examples }})
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if not forloop.last %}
+                    <hr>
+                {% endif %}
                 {% endfor %}
-                <div style="text-align: center;">
-                    <a href="{% url 'classurvey:user_details' %}" class="btn btn-primary">Continue</a>
+                <div class="center" style="margin-top: 20px;">
+                    <a href="{% url 'classurvey:user_details' %}" class="btn btn-primary">Start!</a>
                 </div>
             </div>
         </div>
