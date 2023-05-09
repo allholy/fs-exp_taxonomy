@@ -66,5 +66,5 @@ class ExitInfoModel(models.Model):
     # user_id = models.ForeignKey(UserDetailsModel, on_delete=models.CASCADE, to_field='user_id')
     user_id = models.CharField(max_length=50)
 
-    answer = models.CharField(max_length=255, null=True, blank=True ,default="")
+    answer = models.CharField(max_length=750, null=True, blank=True ,default="")
     date_created = models.DateTimeField('Creation date', auto_now_add=True)
