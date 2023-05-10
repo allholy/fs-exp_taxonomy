@@ -172,17 +172,17 @@ def annotate_sound_view(request):
             # print(f'number of answers {SoundAnswer.objects.count()}')
             return redirect(reverse('classurvey:main'))
     else:
-
         test_sound = get_next_sound_for_user(request)
         if test_sound is None:
             return redirect(reverse('classurvey:exit_info'))
         form = SoundAnswerForm()
         # request.session['next_sound'] = test_sound
-
+   
+    filename = test_sound.sound_name
 
     return render(request, 'classurvey/annotate_sound.html', {
         'test_sound': test_sound, 'form': form,
-        'all_sounds_size': all_sounds_size, 'answered_sounds_size': current_sound_number,
+        'all_sounds_size': all_sounds_size, 'answered_sounds_size': current_sound_number, 'filename': filename,
         'class_titles': {class_key:f'{class_description} ({class_example})' for class_key, class_description, class_example in get_test_descriptions()}
     })
 
