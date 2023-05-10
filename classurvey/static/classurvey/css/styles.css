@@ -63,16 +63,14 @@ footer {
 }
 
 .container-start {
-    max-width: 600px;
-    margin: 0 auto;
+    position: relative;
+    max-width: 400px;
+    margin: 250px auto 0 auto;
+    margin-top: 250px;
     padding: 20px;
     border-radius: 5px; /* same with .card */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .container-instructions {
@@ -89,7 +87,7 @@ footer {
 }
 
 .card.card-question {
-    position: absolute;
+    position: relative;
     top: 20px;
     width: 50%;
     /* background-color: #ffffffec; */
@@ -225,6 +223,22 @@ footer {
     align-items: center;
 }
 
+.footer-logo {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    margin-top: 100px;
+}
+  
+.logo {
+    width: 140px;
+    height: 75px;
+}
 
 /* Responsive styles */
 @media screen and (max-width: 1000px) {
