@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import SoundAnswer, TestSound, ClassChoice, get_test_descriptions
+from .models import SoundAnswer, TestSound, ClassChoice
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
 
 import random

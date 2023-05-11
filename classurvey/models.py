@@ -23,17 +23,6 @@ class ClassChoice(models.Model):
     def __str__(self):
         return f"<ClassChoice {self.class_name}>"
 
-def get_test_descriptions():
-    test_choices = ClassChoice.objects.values_list(
-        'class_key', 'description', 'examples')
-    return test_choices
-
-def get_test_choices():
-    ''' Import choices and put them in a tuple.'''
-    test_choices = ClassChoice.objects.values_list(
-        'class_key', 'class_name')
-    test_choices = tuple(test_choices)
-    return test_choices
 
 class SoundAnswer(models.Model):
     user_id = models.CharField(max_length=50)  # random generate
@@ -42,7 +31,10 @@ class SoundAnswer(models.Model):
 
     # NOTE: If you change the keys, you have to be careful
     # to change them manually in annotate_sound.html file.
-    test_choices = get_test_choices() # available choices
+
+    # Import choices and put them in a tuple.
+    test_choices = ClassChoice.objects.values_list('class_key', 'class_name')
+    test_choices = tuple(test_choices)
 
     chosen_class = models.CharField(max_length=15, choices=test_choices, default="")
     likert_choices = ((1, 'Strongly Unconfident'), (2, 'Unconfident'), (3, 'Neutral'), (4, 'Confident'), (5, 'Strongly Confident'))
