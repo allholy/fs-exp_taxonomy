@@ -20,10 +20,7 @@ class Command(BaseCommand):
             
         self.stdout.write(self.style.SUCCESS(f"Importing data from '{path}'."))
 
-        # Comment out the one you want (for now)
-        #import_sounds_csv(path)
-        import_classes_csv(path)
-
+        import_sounds_csv(path)
 
 
 def import_sounds_csv(file_path):
@@ -35,28 +32,10 @@ def import_sounds_csv(file_path):
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            sound, created = TestSound.objects.get_or_create(
+            sound, _ = TestSound.objects.get_or_create(
                 sound_id=row['ID'],
                 sound_class=row['Class'],
                 sound_group=row['Group'],
-                sound_difficulty=row['Level']
-            )
-            sound.sound_name=row['FileName']
-            sound.save()
-
-
-def import_classes_csv(file_path):
-    '''
-    Import the classes data from csv file.
-    '''
-    #ClassChoice.objects.all().delete
-    with open(file_path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            sound,_ = ClassChoice.objects.get_or_create(
-                class_key=row['ClassKey'],
-                class_name=row['ClassName'],
-                top_level=row['TopLevel'],
-                description=row['Description'],
-                examples=row['Examples'],
+                sound_difficulty=row['Level'],
+                sound_name=row['FileNameModified'],
             )
