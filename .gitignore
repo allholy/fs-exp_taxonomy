@@ -1,8 +1,5 @@
 db.sqlite3
-
+.env
 **/__pycache__/
-**/migrations/
 
 classurvey/data/
-
-.env
