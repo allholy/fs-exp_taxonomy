@@ -204,6 +204,14 @@ def end_view(request):
 def informed_consent_view(request):
     return render(request, 'classurvey/informed_consent.html')
 
+
 @login_required
 def results_view(request):
-    return render(request, 'classurvey/results.html')
+    data = SoundAnswer.objects.values(
+        'test_sound__sound_id', 'test_sound__sound_class', 'chosen_class', 'user_id'
+    )
+    all_data_count = data.count()
+    user_count = len(set(d['user_id'] for d in data.distinct())) #data.distinct('user_id').count()
+    return render(request, 'classurvey/results.html',  {
+        'all_data_count': all_data_count, 'user_count':user_count
+        })
