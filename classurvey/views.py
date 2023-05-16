@@ -98,6 +98,12 @@ def sounds_sizes(request):
     answered_sounds_size = len(test_sound_ids_already_answered)
     return total_sounds_size, answered_sounds_size
 
+def get_test_descriptions():
+    ''' Get descriptions for each category. '''
+    test_choices = ClassChoice.objects.values_list(
+        'class_key', 'description', 'examples')
+    return test_choices
+
 
 def home_view(request):
     user_id = user_id_from_request(request)
