@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('user_id', models.CharField(max_length=50)),
                 ('date_created', models.DateTimeField(auto_now_add=True, verbose_name='Creation date')),
-                ('chosen_class', models.CharField(choices=[(1, 'a'), (2, 'b')], default='', max_length=15)),
+                ('chosen_class', models.CharField(default='', max_length=15)),
                 ('confidence', models.IntegerField(choices=[(1, 'Strongly Unconfident'), (2, 'Unconfident'), (3, 'Neutral'), (4, 'Confident'), (5, 'Strongly Confident')], default='')),
                 ('test_sound', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='classurvey.testsound')),
             ],
