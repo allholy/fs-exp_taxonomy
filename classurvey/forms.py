@@ -17,7 +17,6 @@ class SoundAnswerForm(forms.ModelForm):
             'confidence': 'How confident are you about your answer?'
         }
         widgets = {
-            'chosen_class': forms.RadioSelect,
             'confidence': forms.RadioSelect,
         }
 
