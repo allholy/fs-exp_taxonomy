@@ -22,9 +22,11 @@ You can import them by running `python manage.py import_classes` and `python man
 
 5. `docker-compose run --rm app python manage.py import_sounds /code/classurvey/data/sounds_for_experiment.csv`
 
-6. `docker-compose up`
+6. `docker-compose run --rm app python manage.py import_sounds /code/classurvey/data/sounds_for_experiment.csv`
 
-7. Open `localhost:8500/classsurvey` to see the experiment page.
+7. `docker-compose run --rm app python manage.py createsuperuser`
+
+8. Open `localhost:8500/classsurvey` to see the experiment page.
 
 If you want to run an interactive python shell:
 
