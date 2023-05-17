@@ -1,8 +1,13 @@
 from django import forms
-from .models import SoundAnswer, ExitInfoModel, UserDetailsModel
+from .models import SoundAnswer, ExitInfoModel, UserDetailsModel, ClassChoice
 
 
 class SoundAnswerForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        test_choices = ClassChoice.objects.values_list('class_key', 'class_name')
+        self.fields['chosen_class'].widget = forms.RadioSelect(choices=tuple(test_choices))
 
     class Meta:
         model = SoundAnswer
@@ -12,7 +17,6 @@ class SoundAnswerForm(forms.ModelForm):
             'confidence': 'How confident are you about your answer?'
         }
         widgets = {
-            'chosen_class': forms.RadioSelect,
             'confidence': forms.RadioSelect,
         }
 

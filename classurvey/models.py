@@ -33,10 +33,7 @@ class SoundAnswer(models.Model):
     # to change them manually in annotate_sound.html file.
 
     # Import choices and put them in a tuple.
-    test_choices = ClassChoice.objects.values_list('class_key', 'class_name')
-    test_choices = tuple(test_choices)
-
-    chosen_class = models.CharField(max_length=15, choices=test_choices, default="")
+    chosen_class = models.CharField(max_length=15, default="")
     likert_choices = ((1, 'Strongly Unconfident'), (2, 'Unconfident'), (3, 'Neutral'), (4, 'Confident'), (5, 'Strongly Confident'))
     confidence = models.IntegerField(choices=likert_choices,default="")
 
