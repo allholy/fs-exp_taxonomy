@@ -56,6 +56,7 @@ def assign_group(request, user_id):
         remaining_groups = set(available_groups) - set(groups_already_done)
         selected_group = random.choice(list(remaining_groups))
         request.session['group_number'] = selected_group
+        request.session['sound_order'] = None
         print(selected_group)
         return selected_group
     else:
