@@ -211,14 +211,22 @@ def end_view(request):
 def informed_consent_view(request):
     return render(request, 'classurvey/informed_consent.html')
 
-
+from collections import Counter
+from django.db.models import Count
 @login_required
 def results_view(request):
     data = SoundAnswer.objects.values(
-        'test_sound__sound_id', 'test_sound__sound_class', 'chosen_class', 'user_id'
+        'test_sound__sound_id', 'user_id', 
+        'test_sound__sound_class', 'test_sound__sound_group', 'chosen_class', 
     )
     all_data_count = data.count()
     user_count = len(set(d['user_id'] for d in data.distinct())) #data.distinct('user_id').count()
+    total_answers_data = data.values('test_sound__sound_group', 'user_id')
+    total_answers = total_answers_data.annotate(count=Count('id', distinct=True)).count()
+    group_counts = total_answers_data.distinct()
+    group_counts = dict(Counter(d['test_sound__sound_group'] for d in group_counts))
+
     return render(request, 'classurvey/results.html',  {
-        'all_data_count': all_data_count, 'user_count':user_count
-        })
+        'all_data_count':all_data_count, 'user_count':user_count, 
+        'total_answers':total_answers, 'group_counts':group_counts
+    })
