@@ -254,12 +254,12 @@ footer {
     .iframe-layout {
         transform:translateX(-30px) scale(0.7);
     }
-}
 
-@media screen and (max-width: 1150px) {
+    .horizontal-radio {
+        display: block;
+    }
+
     .card.card-details {
-        top: 40px;
         width: 70%;
-        background-color: #ffffff80;
     }
 }
