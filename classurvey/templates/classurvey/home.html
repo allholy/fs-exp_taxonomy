@@ -2,10 +2,23 @@
 
 {% block content %}
 
+{% if show_popup %}
+<div class="popup">
+  <p class="center">We detected that there is a test left unfinished.</p>  
+  <form method="POST">
+    {% csrf_token %} 
+    <div>
+        <button type="submit" name="action" value="continue" class="btn btn-outline-success btn-sm popup-button">Continue</button>
+        <button type="submit" name="action" value="restart" class="btn btn-outline-danger btn-sm popup-button">Discard</button>
+    </div>
+  </form>
+</div>
+{% endif %}
+
 <div class="container-start center">
     <h1>Welcome!</h1>
     <p>Click the button below to start the experiment:</p>
-    <a href="{% url 'classurvey:instructions' %}" class="btn btn-primary">Start Experiment</a>
+    <a href="{% url 'classurvey:instructions' %}" class="btn btn-primary {% if show_popup %} disabled {% endif %}">Start Experiment</a>
 </div>
 
 {% endblock content %}
