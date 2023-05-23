@@ -10,7 +10,7 @@ You can import them by running `python manage.py import_classes` and `python man
 
 
 
-# Instructions for Docker
+## Instructions for Docker
 
 1. Copy `class_choices.csv` and `sounds_for_experiment.csv` to `classurvey/data/` folder.
 
@@ -22,11 +22,11 @@ You can import them by running `python manage.py import_classes` and `python man
 
 5. `docker-compose run --rm app python manage.py import_sounds /code/classurvey/data/sounds_for_experiment.csv`
 
-6. `docker-compose run --rm app python manage.py import_sounds /code/classurvey/data/sounds_for_experiment.csv`
+6. `docker-compose run --rm app python manage.py createsuperuser`
 
-7. `docker-compose run --rm app python manage.py createsuperuser`
+7. `docker-compose up`
 
-8. Open `localhost:8500/classsurvey` to see the experiment page.
+8. Open `localhost:8500/` to see the experiment page.
 
 If you want to run an interactive python shell:
 
