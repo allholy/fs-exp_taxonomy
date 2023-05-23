@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
 
-from .models import SoundAnswer, TestSound, ClassChoice
+from .models import SoundAnswer, TestSound, ClassChoice, UserDetailsModel, ExitInfoModel
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
 
 import random
@@ -271,8 +272,11 @@ def results_view(request):
 
 @login_required
 def export_view(request):
-    data_all_answers = SoundAnswer.objects.values(
-        'test_sound__sound_id', 'user_id', 
-        'test_sound__sound_class', 'test_sound__sound_group', 'chosen_class', 
-    )
-    return render(request, 'classurvey/export.html',  {})
+    data = {
+        'sound_answers': [(sa.user_id, sa.test_sound.sound_id, sa.chosen_class, sa.confidence, sa.date_created) for sa in SoundAnswer.objects.all()],
+        'user_details': [(ud.user_id, ud.ip_address, ud.q1, ud.q2, ud.q3, ud.q4, ud.date_created) for ud in UserDetailsModel.objects.all()],
+        'written_answers': [(ei.user_id, ei.answer, ei.date_created) for ei in ExitInfoModel.objects.all()],
+    }
+    r = JsonResponse(data)
+    r['Content-Disposition'] = 'attachment; filename=data.json'
+    return r
