@@ -264,9 +264,15 @@ def results_view(request):
     group_counts = total_answers_data.distinct()
     group_counts = dict(Counter(d['test_sound__sound_group'] for d in group_counts))
 
-    
-
     return render(request, 'classurvey/results.html',  {
         'all_data_count':all_data_count, 'user_count':user_count, 
         'total_answers':total_answers, 'group_counts':group_counts
     })
+
+@login_required
+def export_view(request):
+    data_all_answers = SoundAnswer.objects.values(
+        'test_sound__sound_id', 'user_id', 
+        'test_sound__sound_class', 'test_sound__sound_group', 'chosen_class', 
+    )
+    return render(request, 'classurvey/export.html',  {})
