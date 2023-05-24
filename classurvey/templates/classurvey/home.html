@@ -4,14 +4,14 @@
 
 {% if show_popup %}
 <div class="popup">
-  <p class="center">We detected that there is a test left unfinished.</p>  
-  <form method="POST">
-    {% csrf_token %} 
-    <div>
-        <button type="submit" name="action" value="continue" class="btn btn-outline-success btn-sm popup-button">Continue</button>
-        <button type="submit" name="action" value="restart" class="btn btn-outline-danger btn-sm popup-button">Discard</button>
-    </div>
-  </form>
+    <p class="center">We detected that there is a test left unfinished.</p>  
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <button type="submit" name="action" value="continue" class="btn btn-outline-success btn-sm popup-button">Continue</button>
+            <button type="submit" name="action" value="restart" class="btn btn-outline-danger btn-sm popup-button">Discard</button>
+        </div>
+    </form>
 </div>
 {% endif %}
 

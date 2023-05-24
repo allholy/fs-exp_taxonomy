@@ -151,6 +151,10 @@ def home_view(request):
         return render(request, 'classurvey/home.html', {'show_popup': False})
 
 def group_end_view(request):
+    if request.method == 'POST':
+        if 'clear_session_cache' in request.POST:
+            request.session.flush()
+            return redirect('classurvey:home')
     return render(request, 'classurvey/group_end.html')
 
 def instructions_view(request):

@@ -255,6 +255,21 @@ footer {
     margin: 0px 5px;
 }
 
+.cache {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+}
+
+.cache button {
+    font-size: 11px;
+    padding: 5px;
+}
+
 
 /* Responsive styles */
 @media screen and (max-width: 1000px) {
