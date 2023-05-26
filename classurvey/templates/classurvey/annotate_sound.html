@@ -58,7 +58,8 @@
                                 SOUNDSCAPES
                             </div>
                             {% endif %}
-                            <div class="myradio" title='{{ class_titles|dict_key:option.data.value }}'>
+                            <div class="myradio mytooltip">
+                                <span class="tooltiptext">{{ class_titles|dict_key:option.data.value }}</span>
                                 {{ option }}
                             </div>
                             {% endfor %}
