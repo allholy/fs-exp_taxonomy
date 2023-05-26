@@ -121,6 +121,11 @@ def get_test_descriptions():
         'class_key', 'description', 'examples')
     return test_choices
 
+def get_class_tooltip(class_description, class_example):
+    if class_example:
+        return f'{class_description} Examples: {class_example}'
+    else:
+        return f'{class_description}'
 
 def home_view(request):
     user_id = user_id_from_request(request)
@@ -191,6 +196,7 @@ def user_details_view(request):
         form = UserDetailsForm(initial=stored_user_details)
     return render(request, 'classurvey/user_details.html', {'form': form})
 
+
 # test one question
 def annotate_sound_view(request):
 
@@ -232,7 +238,7 @@ def annotate_sound_view(request):
     return render(request, 'classurvey/annotate_sound.html', {
         'test_sound': test_sound, 'form': form,
         'all_sounds_size': all_sounds_size, 'answered_sounds_size': current_sound_number, 'filename': filename,
-        'class_titles': {class_key:f'{class_description} Examples: {class_example}' for class_key, class_description, class_example in get_test_descriptions()}
+        'class_titles': {class_key: get_class_tooltip(class_description, class_example) for class_key, class_description, class_example in get_test_descriptions()}
     })
 
 def exit_info_view(request):
