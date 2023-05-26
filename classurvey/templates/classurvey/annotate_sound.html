@@ -4,98 +4,105 @@
 {% block content %}
 
 
-<form method="post" novalidate autocomplete="off">
-    {% csrf_token %}
-    <input type="hidden" name="test_sound_id" value="{{ test_sound.id }}">
-    
-    <fieldset class="card card-question">
-        <div class="card-header question">
-            <legend>{{ form.chosen_class.label }}</legend>
+<div class="container-instructions">
+    <div class="card">
+        <div class="card-header bg-light">
+            <h1>3) Sound annotation [{{ answered_sounds_size }} / {{ all_sounds_size }}]</h1>
         </div>
         <div class="card-body">
             
-            <div class="center" style="margin-top: -15px">
-                {{ answered_sounds_size }} / {{ all_sounds_size }}
-            </div>
-            <div class="center" style="margin-bottom: -25px">
-                {{ filename }}
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <iframe id="encoder_iframe" frameborder="0" scrolling="yes"
-                    class="iframe-layout">
-                </iframe>
-            </div>
-        </div>
+            <form method="post" novalidate autocomplete="off">
+                {% csrf_token %}
+                <input type="hidden" name="test_sound_id" value="{{ test_sound.id }}">
+                <fieldset>
+                    <div class="center">
+                        <h4>{{ filename }}</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="center">
+                                <div class="encoder_iframe_wrapper">
+                                    <iframe id="encoder_iframe" frameborder="0" scrolling="no" class="iframe-layout"></iframe>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="class-label">
+                            {{ form.chosen_class.label }}
+                        </div>
+                        <div class="error-class">
+                            {{ form.chosen_class.errors }}
+                        </div>
+                        {% for option in form.chosen_class %}
+                        {% if option.data.value == "m-sp" %}
+                        <div class="col-12 col-lg-6">
+                            <div class="topclass-names">
+                                MUSIC
+                            </div>
+                            {% elif option.data.value == "i-p" %}
+                            <div class="topclass-names">
+                                INSTRUMENT SAMPLES
+                            </div>
+                            {% elif option.data.value == "sp-s" %}
+                            <div class="topclass-names">
+                                SPEECH
+                            </div>
+                            {% elif option.data.value == "fx-o" %}
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="topclass-names">
+                                SOUND EFFECTS
+                            </div>
+                            {% elif option.data.value == "ss-n" %}
+                            <div class="topclass-names">
+                                SOUNDSCAPES
+                            </div>
+                            {% endif %}
+                            <div class="myradio" title='{{ class_titles|dict_key:option.data.value }}'>
+                                {{ option }}
+                            </div>
+                            {% endfor %}
+                        </div>     
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="confidence-label">
+                                {{form.confidence.label}}
+                            </div>
+                            <div class="error-confidence">
+                                {{form.confidence.errors}}
+                            </div>
+                            <div class="horizontal-radio">
+                                {% for choice in form.confidence %}
+                                <div>{{choice}}</div>
+                                {% endfor %}    
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="center" style="margin-top:30px;margin-bottom:30px;">
+                        {% if answered_sounds_size != all_sounds_size %}
+                        <input type="submit" class="btn btn-primary" value="Continue with the next sound">
+                        {% else %}
+                        <input type="submit" class="btn btn-primary" value="Continue to the next phase">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-footer tip">
+                    Tip: Remember you can hover over the sub category names to see their decription and examples! </br>
+                    Tip: If you select the sub-category "other", make sure you choose it from the correct top-level category.
+                </div>
+            </fieldset>
+        </form>
         
-        <div class="row">
-            <div class="error-class">
-                {{ form.chosen_class.errors }}
-            </div>
-            {% for option in form.chosen_class %}
-            {% if option.data.value == "m-sp" %}
-            <div class="col-12 col-lg-6">
-                    <div class="topclass-names">
-                        MUSIC
-                    </div>
-                    {% elif option.data.value == "i-p" %}
-                    <div class="topclass-names">
-                        INSTRUMENT SAMPLES
-                    </div>
-                    {% elif option.data.value == "sp-s" %}
-                    <div class="topclass-names">
-                        SPEECH
-                    </div>
-                    {% elif option.data.value == "fx-o" %}
-                </div>
-                <div class="col-12 col-lg-6">
-                    <div class="topclass-names">
-                        SOUND EFFECTS
-                    </div>
-                    {% elif option.data.value == "ss-n" %}
-                    <div class="topclass-names">
-                        SOUNDSCAPES
-                    </div>
-                    {% endif %}
-                    <div class="myradio" title='{{ class_titles|dict_key:option.data.value }}'>
-                        {{ option }}
-                    </div>
-                    {% endfor %}
-                </div>     
-            </div>
-            
-            <div class="row">
-                <div class="col-12">
-                    <div class="error-confidence">
-                        {{form.confidence.errors}}
-                    </div>
-                    <div class="confidence-label">
-                        {{form.confidence.label}}
-                    </div>
-                    <div class="horizontal-radio">
-                        {% for choice in form.confidence %}
-                        <div>{{choice}}</div>
-                        {% endfor %}    
-                    </div>
-                </div>
-            </div>
-            
-            <div class="right">
-                <input type="submit" class="btn btn-outline-dark" value="Next">
-            </div>
-        </div>
-        <div class="card-footer tip">
-            Tip: Remember you can hover over the categories to see their decription! </br>
-            Tip: If you select "other", be careful to choose the correct top-level category.
-        </div>
-    </fieldset>
-</form>
-
+    </div>
+</div>
+</div>
 
 <script>
     var iframe = document.getElementById('encoder_iframe')
-    iframe.src="https://freesound.org/embed/sound/iframe/{{ test_sound.sound_id }}/simple/large_no_info/"
+    iframe.src="https://freesound.org/embed/sound/iframe/{{ test_sound.sound_id }}/simple/full_size_no_info/"
 </script>
 
 

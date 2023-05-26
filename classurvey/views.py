@@ -232,7 +232,7 @@ def annotate_sound_view(request):
     return render(request, 'classurvey/annotate_sound.html', {
         'test_sound': test_sound, 'form': form,
         'all_sounds_size': all_sounds_size, 'answered_sounds_size': current_sound_number, 'filename': filename,
-        'class_titles': {class_key:f'{class_description} ({class_example})' for class_key, class_description, class_example in get_test_descriptions()}
+        'class_titles': {class_key:f'{class_description} Examples: {class_example}' for class_key, class_description, class_example in get_test_descriptions()}
     })
 
 def exit_info_view(request):

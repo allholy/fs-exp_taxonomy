@@ -5,44 +5,45 @@
 <div class="container-instructions">
     <div class="card">
         <div class="card-header bg-light">
-            <h1>Information</h1>
+            <h1>Experiment information</h1>
         </div>
         <div class="card-body">
             <h4>Description:</h4>
             <p>
-                This experiment is a listening test, where you are asked to assign categories to a group of given sounds. The aformentioned categories belong to the
-                new <a href="https://en.wikipedia.org/wiki/Taxonomy" style="color: black;">taxonomy</a> we are introducing for sound description in 
-                <a href="https://freesound.org/">Freesound</a>. 
-                The proposed taxonomy is explained before the listening part, in which there are 5 top-level categories with 3-10 subcategories to each. 
+                The <b>Freesound Taxonomies</b> experiment is a listening test in which you are asked to categorize a number of sounds into a set of "categories". 
+                These categories belong to a new <a target="_blank" href="https://en.wikipedia.org/wiki/Taxonomy" style="color: black;">taxonomy</a> that we are designing
+                to aid the sound description process in <a target="_blank" href="https://freesound.org/">Freesound</a>. 
+                The purpose of the experiment is to understand whether or not our taxonomy is clear and understandable for a general audience, and how suitable it is for being integrated with Freesound.
             </p>
 
             <h4>Instructions:</h4>
             <ul>
-                <li>This experiment is gonna take around 20 minutes and we suggest completing it in a single sitting.</li>
-                <li>You are asked to:</li>
+                <li>The experiment consists of the following 4 phases:</li>
                 <ul>
-                    <li>get familiar with the taxonomy for a few minutes,</li>
-                    <li>provide some basic demographic data (e.g. if you are freesound user or musician),</li>
-                    <li>listen to around ~20 given sounds one by one and choose the best category for each,</li>
-                    <li>give text feedback to the taxonomy (optionally).</li>
+                    <li>1) Get familiar with the taxonomy and its categories. There are 5 top-level categories and between 3 and 10 sub categories for each top-level category.</li>
+                    <li>2) Provide some basic demographic data (e.g. if you are Freesound user, a musician, etc.).</li>
+                    <li>3) Select the most apporpriate category for each of the ~20 sounds that you'll be presented one by one.</li>
+                    <li>4) Provide any additional textual feedback about the taxonomy (optional).</li>
                 </ul>
-                <li>Each sound can be assigned to only <i>one</i> category.</li>
-                <li>It is preferable to be located in a <i>quiet</i> environment.</li>
-                <li>To ensure accurate results, please refrain from using the <i>back button</i> during the experiment.</li>
-                <li>We kindly request you to finish and <i>submit</i> the results, otherwise your answers won't be commited.</li>
+                <li>The experiment takes approximately 20 minutes. We suggest completing it in a single sitting.</li>
+                <li>It is preferable to be located in a <i>quiet</i> environment and use headphones so you can listen to the sounds without interferences.</li>
+                <li>To ensure accurate results, please refrain from using the browser's <i>back button</i> during the experiment.</li>
             </ul>
-
+    
             <div class="checkbox">
-                <input type="checkbox" checked> I consent on participating in this study and have read the <a href="{% url 'classurvey:informed_consent' %}">experiment terms</a>.
+                Before starting the experiment, please make sure you have read the <a href="{% url 'classurvey:informed_consent' %}">experiment terms</a> and give your consent by checking the checkbox below.
+                Note that you can only carry out the experiment if you are above 14 or more years old. Furhtermore, if you're under 18, you'll have to carry out the experiment accompanied by your legal guardian.
+                <br><br>
+                <input type="checkbox" checked> I consent on participating in this study and have read the experiment terms.
             </div>
-
-            <footer>
-                This research is carried by Universitat Pompeu Fabra. Contact us on <a href="mailto:panagiota.anastasopoulou@upf.edu">panagiota.anastasopoulou@upf.edu</a>
-                or <a href="mailto:frederic.font@upf.edu">frederic.font@upf.edu</a> for any technical problems or questions.
+        
+            <footer><br>
+                This research is carried by Universitat Pompeu Fabra. You can contact us at <a href="mailto:panagiota.anastasopoulou@upf.edu">panagiota.anastasopoulou@upf.edu</a>
+                or <a href="mailto:frederic.font@upf.edu">frederic.font@upf.edu</a> for any technical problems or questions you might have.
             </footer>
 
-            <div class="center">
-                <a href="{% url 'classurvey:taxonomy' %}" class="btn btn-primary">Continue</a>
+            <div class="center" style="margin-top:30px;margin-bottom:10px">
+                <a href="{% url 'classurvey:taxonomy' %}" class="btn btn-primary">Start the experiment!</a>
             </div>
         </div>
     </div>
