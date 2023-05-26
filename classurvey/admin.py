@@ -12,7 +12,7 @@ class ExitInfoAdmin(admin.ModelAdmin):
     search_fields = ['answer']
 
 class UserDetailsAdmin(admin.ModelAdmin):
-    list_display = ('user_id','ip_address','q1','q2','q3','q4')
+    list_display = ('user_id','ip_address','q1','q2','q3','q4','date_created')
     search_fields = ['answer']
 
 
