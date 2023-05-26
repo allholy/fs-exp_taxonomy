@@ -30,7 +30,7 @@ class UserDetailsForm(forms.ModelForm):
             'q1':'Are you a Freesound user?',
             'q2':'If so, how many sounds have you uploaded (approximately)?',
             'q3':'Do you have experience with audio/music technology?',
-            'q4':'Are you a musician?',
+            'q4':'Do you have experience as a musician?',
         }
         widgets = {
             'q1': forms.RadioSelect,
