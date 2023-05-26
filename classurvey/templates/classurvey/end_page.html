@@ -3,13 +3,18 @@
 {% block content %}
 
 <div class="pos-end">
-    <div class="brd">
+    <div class="brd" style="width:70%">
         <h3> 
-            Thank you for participating on the survey. Your answers have been submitted successfully. 
+            Thank you for participating in the Freesound Taxonomies experiment!
         </h3>
+        <p>
+            Your answers have been submitted and recorded successfully and you can now safely close this page.
+            If you want, <b>you can repeat the experiment and categorize a different set of sounds</b>. 
+            Please click the button below if you wish to do so.
+        </p>
 
-        You can now close this page or do again the experiment and categorize a different set of sounds. 
-        <br><br>
+        
+        <br>
 
         <a href="{% url 'classurvey:home' %}" class="btn btn-primary btn-sm button-end">Do the experiment again</a>
     </div>
