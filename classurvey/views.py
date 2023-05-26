@@ -36,9 +36,10 @@ def make_sound_order(request):
 def get_ip_address(request):
     user_ip_address = request.META.get('HTTP_X_FORWARDED_FOR')
     if user_ip_address:
-        return user_ip_address.split(',')[0]
+        raw_address = user_ip_address.split(',')[0]
     else:
-        return request.META.get('REMOTE_ADDR')
+        raw_address = request.META.get('REMOTE_ADDR')
+    return '.'.join(raw_address.split('.')[:-1])
 
 def groups_already_done_for_user(request,user_id):
     groups_already_done = SoundAnswer.objects.filter(user_id=user_id).values_list(
