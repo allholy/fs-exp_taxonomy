@@ -28,7 +28,7 @@ def import_classes_csv(file_path):
     Import the classes data from csv file.
     '''
     #NOTE: remember to delete all existing data before re-upload
-    #ClassChoice.objects.all().delete
+    #ClassChoice.objects.all().delete()
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
