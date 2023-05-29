@@ -30,7 +30,7 @@
                 <li>To ensure accurate results, please refrain from using the browser's <i>back button</i> during the experiment.</li>
             </ul>
     
-            <form action="{% url 'classurvey:taxonomy' %}" method="GET" style="display:block">
+            <form action="{% url 'classurvey:taxonomy' %}" method="POST" style="display:block">
                 {% csrf_token %}
                 <div class="checkbox">
                     Before starting the experiment, please make sure you have read the <a href="{% url 'classurvey:informed_consent' %}">experiment terms</a> and give your consent by checking the checkbox below.
