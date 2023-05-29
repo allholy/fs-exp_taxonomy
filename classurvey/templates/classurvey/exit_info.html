@@ -2,23 +2,23 @@
 
 {% block content %}
 
-<div class="container-instructions">
+<div class="container-main">
     <div class="card">
-        <div class="card-header bg-light">
-            <h1>4) Additional feedback</h1>
+        <div class="card-header">
+            <h1>Additional feedback</h1>
         </div>
         <div class="card-body">
             <form method="post" novalidate>
                 {% csrf_token %}
                 <div style="width:100%">
                     {% for field in form %}
-                        <div class="box-feedback" style="margin-top: 15px;">
+                        <div class="box-feedback">
                             {{ field.errors }}
                             {{ field.label_tag }}
                             {{ field }}
                         </div>
                     {% endfor %}
-                    <div class="center" style="margin-top: 40px;">
+                    <div class="center" style="margin-top: 50px;">
                         <input type="submit" class="btn btn-success" value="Submit feedback and finish the experiment">
                     </div>
                 </div>

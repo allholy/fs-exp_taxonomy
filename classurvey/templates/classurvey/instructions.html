@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<div class="container-instructions">
+<div class="container-main">
     <div class="card">
-        <div class="card-header bg-light">
+        <div class="card-header">
             <h1>Experiment information</h1>
         </div>
         <div class="card-body">
@@ -30,21 +30,27 @@
                 <li>To ensure accurate results, please refrain from using the browser's <i>back button</i> during the experiment.</li>
             </ul>
     
-            <div class="checkbox">
-                Before starting the experiment, please make sure you have read the <a href="{% url 'classurvey:informed_consent' %}">experiment terms</a> and give your consent by checking the checkbox below.
-                Note that you can only carry out the experiment if you are above 14 or more years old. Furhtermore, if you're under 18, you'll have to carry out the experiment accompanied by your legal guardian.
-                <br><br>
-                <input type="checkbox" checked> I consent on participating in this study and have read the experiment terms.
-            </div>
-        
-            <footer><br>
-                This research is carried by Universitat Pompeu Fabra. You can contact us at <a href="mailto:panagiota.anastasopoulou@upf.edu">panagiota.anastasopoulou@upf.edu</a>
-                or <a href="mailto:frederic.font@upf.edu">frederic.font@upf.edu</a> for any technical problems or questions you might have.
-            </footer>
-
-            <div class="center" style="margin-top:30px;margin-bottom:10px">
-                <a href="{% url 'classurvey:taxonomy' %}" class="btn btn-primary">Start the experiment!</a>
-            </div>
+            <form action="{% url 'classurvey:taxonomy' %}" method="GET" style="display:block">
+                {% csrf_token %}
+                <div class="checkbox">
+                    Before starting the experiment, please make sure you have read the <a href="{% url 'classurvey:informed_consent' %}">experiment terms</a> and give your consent by checking the checkbox below.
+                    Note that you can only carry out the experiment if you are above 14 or more years old. Furhtermore, if you're under 18, you'll have to carry out the experiment accompanied by your legal guardian.
+                    <br><br>
+                        <label>
+                            <input type="checkbox" name="consent" required>
+                            I consent to participating in this study and have read the experiment terms.
+                        </label>
+                </div>
+                
+                <footer><br>
+                    This research is carried by Universitat Pompeu Fabra. You can contact us at <a href="mailto:panagiota.anastasopoulou@upf.edu">panagiota.anastasopoulou@upf.edu</a>
+                    or <a href="mailto:frederic.font@upf.edu">frederic.font@upf.edu</a> for any technical problems or questions you might have.
+                </footer>
+                
+                <div class="center" style="margin-top:30px;margin-bottom:10px">
+                    <input type="submit" class="btn btn-dark" value="Start experiment!">
+                </div>
+            </form>
         </div>
     </div>
 </div>

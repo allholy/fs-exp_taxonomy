@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<div class="container-instructions">
+<div class="container-main">
     <div class="card">
-        <div class="card-header bg-light">
-            <h1>1) Familiarisation with the taxonomy</h1>
+        <div class="card-header">
+            <h1>Familiarization with the taxonomy</h1>
             <div class="center">
                 Below is the taxonomy we have designed. Please, spend <u>4-5 minutes</u> looking at the top-level categories, the sub categories and its definition and examples to get familiar with them.
                 Note that later during the cateogrization phase, you'll still be able to see all avialable taxonomy categories. Category definitions and examples will also be available by <u>hovering</u> over the categories' names.
@@ -63,7 +63,7 @@
                 {% endif %}
                 {% endfor %}
                 <div class="center" style="margin-top: 20px;">
-                    <a href="{% url 'classurvey:user_details' %}" class="btn btn-primary">Continue to the next phase</a>
+                    <a href="{% url 'classurvey:user_details' %}" class="btn btn-dark">Continue to the next phase</a>
                 </div>
             </div>
         </div>

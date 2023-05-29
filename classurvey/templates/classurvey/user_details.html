@@ -2,18 +2,20 @@
 
 {% block content %}
 
-<div class="container-instructions">
+<div class="container-main">
     <div class="card">
-        <div class="card-header bg-light">
-            <h1>2) Demographic questions</h1>
+        <div class="card-header">
+            <h1>Demographic questions</h1>
         </div>
         <div class="card-body">
             <form method="post" novalidate>
                 {% csrf_token %}
-                <div class="card-body2">
+                <div class="details">
+                    <br>
                     {{ form.as_p}}
+                    <br><br>
                     <div class="center">
-                        <input type="submit" class="btn btn-primary" value="Start categorizing sounds">
+                        <input type="submit" class="btn btn-dark" value="Start categorizing sounds">
                     </div>
                 </div>
             </form>

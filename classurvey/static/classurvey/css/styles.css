@@ -65,15 +65,14 @@ footer {
 .container-start {
     position: relative;
     max-width: 400px;
-    margin: 20% auto 0 auto;
-    /* margin-top: 250px; */
+    margin: 10% auto 0 auto;
     padding: 20px;
     border-radius: 5px; /* same with .card */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 }
 
-.container-instructions {
+.container-main {
     padding: 20px;
     width: 70%;
     margin: auto;
@@ -83,55 +82,26 @@ footer {
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 20px #0000001a;
+    background-color: #ebe6ff20;
     /* height: 80vh; */
 }
 
 .card.card-question {
-    position: relative;
-    top: 20px;
-    width: 50%;
-    /* background-color: #ffffffec; */
-    background: radial-gradient(circle, #eeedd9 0%, #d2c9fc80 100%);
+    background: radial-gradient(circle, #fffeed 0%, #ebe1fc80 100%);
 }
 
-.card-instructions {
-    padding: 3vh;
-    width: 70%;
-    margin: auto;
-}
-
-.card.card-details { /* demographic and feedback */
-    top: 20px;
-    width: 50%;
-    background-color: #ffffff80;
-}
-
-.card-header.bg-light {
-    background-color: #f8f9fa;
+.card-header {
+    background-color: #fffff5ee;
     color: #333;
     padding: 20px;
-}
-
-.card-header.question {
-    background-color: #fdfdcdee;
-    padding: 25px;
-}
-
-.card-header.details {
-    background-color: #f8f8d3ee;
-    padding: 25px;
 }
 
 .card-body {
     padding: 30px;
 }
 
-.card-body2 {
-    padding: 40px 60px;
-}
-
 .card-footer {
-    background-color: #fdfdcdee;
+    background-color: #ffffefee;
     padding: 5px;
     bottom: 30px;
 }
@@ -140,6 +110,7 @@ footer {
     border: 2px solid black; 
     padding: 10px; 
     text-align: center;
+    width: 60%;
 }
 
 .pos-end {
@@ -186,6 +157,7 @@ footer {
 
 .horizontal-radio {
     display: flex;
+    justify-content: center;
 }
 
 .horizontal-radio label {
@@ -223,7 +195,7 @@ footer {
 }
 
 .textarea {
-    width: 90%;
+    width: 75%;
     height: 200px;
     box-sizing: border-box; 
     margin-top:15px;
@@ -254,7 +226,7 @@ footer {
 
 .popup {
     position: relative;
-    max-width: 350px;
+    max-width: 450px;
     margin: 20px auto 0 auto;
     background-color: #ffffff46;
     padding: 10px;
@@ -282,46 +254,13 @@ footer {
     padding: 5px;
 }
 
-
-/* Responsive styles */
-@media screen and (max-width: 1000px) {
-    .container {
-        max-width: 100%;
-        box-shadow: none;
-    }
-
-    .card.card-question  {
-        width: 70%;
-    }
-
-    .horizontal-radio {
-        display: block;
-    }
-
-    .card.card-details {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 850px) {
-   
-    .encoder_iframe_wrapper {
-        width:300px;
-    }
-
-    .iframe-layout {
-        height: 90px;
-    }
-}
-
-
 /* Tooltip container from https://www.w3schools.com/css/css_tooltip.asp */
-
 .mytooltip {
     position: relative;
 }
-  /* Tooltip text */
-  .mytooltip .tooltiptext {
+
+/* Tooltip text */
+.mytooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -333,16 +272,35 @@ footer {
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
+}
 
-  }
-
-  .mytooltip .tooltiptext {
+.mytooltip .tooltiptext {
     width: 300px;
     top: 100%;
     left: 30%; 
-  }
+}
   
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .mytooltip:hover .tooltiptext {
+/* Show the tooltip text when you mouse over the tooltip container */
+.mytooltip:hover .tooltiptext {
     visibility: visible;
-  }
+}
+
+
+/* Responsive styles */
+@media screen and (max-width: 850px) { 
+    .container-main {
+        width: 90%;
+    }
+
+    .horizontal-radio {
+        display: block;
+    }
+
+    .encoder_iframe_wrapper {
+        width:300px;
+    }
+
+    .iframe-layout {
+        height: 90px;
+    }
+}
