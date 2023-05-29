@@ -30,7 +30,7 @@ class UserDetailsForm(forms.ModelForm):
             'q1':'Are you a Freesound user?',
             'q2':'If so, how many sounds have you uploaded (approximately)?',
             'q3':'Do you have experience with audio/music technology?',
-            'q4':'Are you a musician?',
+            'q4':'Do you have experience as a musician?',
         }
         widgets = {
             'q1': forms.RadioSelect,
@@ -43,7 +43,7 @@ class UserDetailsForm(forms.ModelForm):
 class ExitInfoForm(forms.ModelForm):
     answer = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'textarea'}), 
-        label='Do you have some feedback for the taxonomy?',
+        label='Thanks for annotating all sounds! Please use the space below to optionally provide any additional feedback that you might want to share about the taxonomy.',
         required=False
     )
 

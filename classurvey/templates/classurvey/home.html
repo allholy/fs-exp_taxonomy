@@ -4,12 +4,12 @@
 
 {% if show_popup %}
 <div class="popup">
-    <p class="center">We detected that there is a test left unfinished.</p>  
+    <p class="center">We detected that you have an ongoing experiment which was left unfinished. Do you want to continue with the previous experiment or start a new one?</p>  
     <form method="POST">
         {% csrf_token %}
         <div>
             <button type="submit" name="action" value="continue" class="btn btn-outline-success btn-sm popup-button">Continue</button>
-            <button type="submit" name="action" value="restart" class="btn btn-outline-danger btn-sm popup-button">Discard</button>
+            <button type="submit" name="action" value="restart" class="btn btn-outline-danger btn-sm popup-button">Start a new one</button>
         </div>
     </form>
 </div>
@@ -17,8 +17,8 @@
 
 <div class="container-start center">
     <h1>Welcome!</h1>
-    <p>Click the button below to start the experiment:</p>
-    <a href="{% url 'classurvey:instructions' %}" class="btn btn-primary {% if show_popup %} disabled {% endif %}">Start Experiment</a>
+    <p>Click the button below to enter the<br><b>Freesound Taxonomies</b> experiment.</p>
+    <a href="{% url 'classurvey:instructions' %}" class="btn btn-dark {% if show_popup %} disabled {% endif %}">Enter</a>
 </div>
 
 {% endblock content %}

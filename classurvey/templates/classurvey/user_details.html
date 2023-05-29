@@ -2,23 +2,26 @@
 
 {% block content %}
 
-<form method="post" novalidate>
-    {% csrf_token %}
-    <fieldset class="card card-details">
-        <div class="card-header details">
-            <legend>Demographic questions</legend>
+<div class="container-main">
+    <div class="card">
+        <div class="card-header">
+            <h1>Demographic questions</h1>
         </div>
-
-        <div class="card-body2">
-            {{ form.as_p}}
-
-            <div class="center">
-                <input type="submit" class="btn btn-outline-dark" value="Next">
-            </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <div class="details">
+                    <br>
+                    {{ form.as_p}}
+                    <br><br>
+                    <div class="center">
+                        <input type="submit" class="btn btn-dark" value="Start categorizing sounds">
+                    </div>
+                </div>
+            </form>
         </div>
-    </fieldset>
-</form>
-
+    </div>
+</div>
 
 <script>
     const q1RadioOptions = document.getElementsByName('q1');
