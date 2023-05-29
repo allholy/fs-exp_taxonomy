@@ -82,12 +82,12 @@ footer {
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 20px #0000001a;
-    background-color: #ebe6ff20;
+    background-color: #e0d8ff44;
     /* height: 80vh; */
 }
 
 .card.card-question {
-    background: radial-gradient(circle, #fffeed 0%, #ebe1fc80 100%);
+    background: radial-gradient(circle, #fffeed 0%, #e0dcff8c 100%);
 }
 
 .card-header {
