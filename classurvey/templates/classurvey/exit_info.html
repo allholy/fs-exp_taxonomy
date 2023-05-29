@@ -10,7 +10,7 @@
         <div class="card-body">
             <form method="post" novalidate>
                 {% csrf_token %}
-                <div style="width:100%">
+                <div>
                     {% for field in form %}
                         <div class="box-feedback">
                             {{ field.errors }}
