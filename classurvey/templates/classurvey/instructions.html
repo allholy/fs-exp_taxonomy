@@ -19,12 +19,12 @@
             <h4>Instructions:</h4>
             <ul>
                 <li>The experiment consists of the following 4 phases:</li>
-                <ul>
-                    <li>1) Get familiar with the taxonomy and its categories. There are 5 top-level categories and between 3 and 10 sub categories for each top-level category.</li>
-                    <li>2) Provide some basic demographic data (e.g. if you are Freesound user, a musician, etc.).</li>
-                    <li>3) Select the most apporpriate category for each of the ~20 sounds that you'll be presented one by one.</li>
-                    <li>4) Provide any additional textual feedback about the taxonomy (optional).</li>
-                </ul>
+                <ol>
+                    <li>Get familiar with the taxonomy and its categories. There are 5 top-level categories and between 3 and 10 sub categories for each top-level category.</li>
+                    <li>Provide some basic demographic data (e.g. if you are Freesound user, a musician, etc.).</li>
+                    <li>Select the most apporpriate category for each of the ~20 sounds that you'll be presented one by one.</li>
+                    <li>Provide any additional textual feedback about the taxonomy (optional).</li>
+                </ol>
                 <li>The experiment takes approximately 15-20 minutes. We suggest completing it in a single sitting.</li>
                 <li>It is preferable to be located in a <i>quiet</i> environment and use headphones so you can listen to the sounds without interferences.</li>
                 <li>To ensure accurate results, please refrain from using the browser's <i>back button</i> during the experiment.</li>
@@ -34,7 +34,7 @@
                 {% csrf_token %}
                 <div class="checkbox">
                     Before starting the experiment, please make sure you have read the <a href="{% url 'classurvey:informed_consent' %}">experiment terms</a> and give your consent by checking the checkbox below.
-                    Note that you can only carry out the experiment if you are above 14 or more years old. Furhtermore, if you're under 18, you'll have to carry out the experiment accompanied by your legal guardian.
+                    Note that you can only carry out the experiment if you are above 14 years old. Furthermore, if you're under 18, you'll have to carry out the experiment accompanied by your legal guardian.
                     <br><br>
                         <label>
                             <input type="checkbox" name="consent" required>
@@ -43,7 +43,7 @@
                 </div>
                 
                 <footer><br>
-                    This research is carried by Universitat Pompeu Fabra. You can contact us at <a href="mailto:panagiota.anastasopoulou@upf.edu">panagiota.anastasopoulou@upf.edu</a>
+                    This research is carried out by Universitat Pompeu Fabra. You can contact us at <a href="mailto:panagiota.anastasopoulou@upf.edu">panagiota.anastasopoulou@upf.edu</a>
                     or <a href="mailto:frederic.font@upf.edu">frederic.font@upf.edu</a> for any technical problems or questions you might have.
                 </footer>
                 
