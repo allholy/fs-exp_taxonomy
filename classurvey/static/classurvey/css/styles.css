@@ -146,13 +146,15 @@ footer {
 .confidence-label {
     text-align: center;
     text-decoration: underline;
+    font-weight: bold;
     margin: 35px 20px 10px 20px;
 }
 
 .class-label {
     text-align: center;
     text-decoration: underline;
-    margin: 10px 20px 10px 20px;
+    font-weight: bold;
+    margin: 10px 20px;
 }
 
 .horizontal-radio {
@@ -286,7 +288,7 @@ footer {
 
 
 /* Responsive styles */
-@media screen and (max-width: 850px) { 
+@media screen and (max-width: 900px) { 
     .container-main {
         width: 90%;
     }
@@ -296,7 +298,7 @@ footer {
     }
 
     .encoder_iframe_wrapper {
-        width:300px;
+        width: 320px;
     }
 
     .iframe-layout {
