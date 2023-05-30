@@ -18,7 +18,7 @@ class ClassChoice(models.Model):
     class_name = models.CharField(max_length=50)
     top_level = models.CharField(max_length=20)
     description = models.CharField(max_length=255, null=True)
-    examples = models.CharField(max_length=255, null=True)
+    examples = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return f"<ClassChoice {self.class_name}>"
@@ -34,7 +34,7 @@ class SoundAnswer(models.Model):
 
     # Import choices and put them in a tuple.
     chosen_class = models.CharField(max_length=15, default="")
-    likert_choices = ((1, 'Strongly Unconfident'), (2, 'Unconfident'), (3, 'Neutral'), (4, 'Confident'), (5, 'Strongly Confident'))
+    likert_choices = ((1, 'Very Unconfident'), (2, 'Unconfident'), (3, 'Neutral'), (4, 'Confident'), (5, 'Very Confident'))
     confidence = models.IntegerField(choices=likert_choices,default="")
 
 
@@ -55,5 +55,5 @@ class ExitInfoModel(models.Model):
     # user_id = models.ForeignKey(UserDetailsModel, on_delete=models.CASCADE, to_field='user_id')
     user_id = models.CharField(max_length=50)
 
-    answer = models.CharField(max_length=750, null=True, blank=True ,default="")
+    answer = models.CharField(max_length=750, null=True, blank=True, default="")
     date_created = models.DateTimeField('Creation date', auto_now_add=True)
