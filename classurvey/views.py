@@ -51,23 +51,43 @@ def assign_group(request, user_id):
     ''' 
     Assign one group to the user and save it to the session.
     '''
-    # see on the given table how many groups exist
+    # see on the table how many groups exist.
     available_groups = TestSound.objects.values_list(
         'sound_group', flat=True).distinct()
-    # groups done. if it is empty, none are done.
-    groups_already_done = SoundAnswer.objects.filter(user_id=user_id).values_list(
+    # groups done from the same user. if it is empty, none are done.
+    groups_already_done_user = SoundAnswer.objects.filter(user_id=user_id).values_list(
         'test_sound__sound_group', flat=True).distinct()
-    # print(f"Answered groups: {groups_already_done}")
+    print(f"Answered groups from user: {groups_already_done_user}")
 
-    # check if all groups are done. 
-    if not len(groups_already_done) == len(available_groups):
-        remaining_groups = set(available_groups) - set(groups_already_done)
-        selected_group = random.choice(list(remaining_groups))
+    # select group that is less annotated in total answers AND not done from the same user
+    if not len(groups_already_done_user) == len(available_groups): # if not all groups from user are done, select a group.
+        remaining_groups_user = set(available_groups) - set(groups_already_done_user)
+
+        # see which group is less annotated from all answers
+        count_per_group = SoundAnswer.objects.values('test_sound__sound_group').annotate(
+            count=Count('test_sound__sound_group')).order_by('count')
+        # size of groups in all answers
+        answered_groups_count = count_per_group.count()
+        # print(count_per_group,answered_groups_count)
+
+        if answered_groups_count == len(available_groups): # if True, all groups are in all the answers
+            less_annotated_group = count_per_group.first()
+            selected_group = less_annotated_group['test_sound__sound_group'] 
+            if not selected_group in remaining_groups_user: # if the less annotated is already answered, choose random
+                selected_group = random.choice(list(remaining_groups_user))
+        elif answered_groups_count == 0: # if ZERO answers are given yet
+            selected_group = random.choice(list(remaining_groups_user))
+            print("No answers yet.")
+        else: # if True, some groups are answered yet (still unanswered groups)
+            answered_groups = SoundAnswer.objects.values_list('test_sound__sound_group', flat=True).distinct()
+            available_groups = remaining_groups_user - set(answered_groups)
+            selected_group = random.choice(list(available_groups))
+
         request.session['group_number'] = selected_group
         request.session['sound_order'] = None
-        # print(f"Current group: {selected_group}")
+        print(f"Current group: {selected_group}")
         return selected_group
-    else:
+    else: # if user finished all groups
         # when done, redirect to a page that says they tested all sounds.
         return 'done'
 
