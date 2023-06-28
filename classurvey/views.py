@@ -1,8 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
+
+from collections import Counter
 
 from .models import SoundAnswer, TestSound, ClassChoice, UserDetailsModel, ExitInfoModel
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
@@ -280,8 +283,29 @@ def end_view(request):
 def informed_consent_view(request):
     return render(request, 'classurvey/informed_consent.html')
 
-from collections import Counter
-from django.db.models import Count
+
+def count_groups_complete(request):
+    '''
+    Check if each user for each group has completed all the questions in survey.
+    '''
+    unfinished_count = 0
+
+    data = SoundAnswer.objects.values('user_id','test_sound__sound_group')
+    distinct_surveys = data.values('user_id', 'test_sound__sound_group').distinct()
+
+    for survey in distinct_surveys:
+        user_id = survey['user_id']
+        group_number = survey['test_sound__sound_group']       
+        answers_count = data.filter(user_id=user_id, test_sound__sound_group=group_number).count()
+
+        test_sound_ids_in_group = TestSound.objects.filter(sound_group=group_number).values_list('id', flat=True)
+        total_sounds_size = len(test_sound_ids_in_group)
+
+        if not total_sounds_size == answers_count:
+            unfinished_count += 1
+
+    finished_count = len(distinct_surveys) - unfinished_count
+    return finished_count, unfinished_count
 
 @login_required
 def results_view(request):
@@ -295,10 +319,12 @@ def results_view(request):
     total_answers = total_answers_data.annotate(count=Count('id', distinct=True)).count()
     group_counts = total_answers_data.distinct()
     group_counts = dict(Counter(d['test_sound__sound_group'] for d in group_counts))
+    completed_groups, uncompleted_groups = count_groups_complete(request)
 
     return render(request, 'classurvey/results.html',  {
         'all_data_count':all_data_count, 'user_count':user_count, 
-        'total_answers':total_answers, 'group_counts':group_counts
+        'total_answers':total_answers, 'group_counts':group_counts, 
+        'completed_groups':completed_groups, 'uncompleted_groups':uncompleted_groups
     })
 
 @login_required
