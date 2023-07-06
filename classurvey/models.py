@@ -23,6 +23,13 @@ class ClassChoice(models.Model):
     def __str__(self):
         return f"<ClassChoice {self.class_name}>"
 
+class TopLevel(models.Model):
+    top_level_name = models.CharField(max_length=10)
+    top_level_description = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"<TopLevel {self.class_name}>"
+    
 
 class SoundAnswer(models.Model):
     user_id = models.CharField(max_length=50)  # random generate

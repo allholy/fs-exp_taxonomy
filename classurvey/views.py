@@ -7,7 +7,7 @@ from django.utils import timezone
 
 from collections import Counter
 
-from .models import SoundAnswer, TestSound, ClassChoice, UserDetailsModel, ExitInfoModel
+from .models import SoundAnswer, TestSound, ClassChoice, UserDetailsModel, ExitInfoModel, TopLevel
 from .forms import SoundAnswerForm, UserDetailsForm, ExitInfoForm
 
 import random
@@ -192,10 +192,14 @@ def instructions_view(request):
 def taxonomy_view(request):
     top_levels = ClassChoice.objects.values_list('top_level',flat=True).distinct()
     level_group = {}
+    top_level_description = {}
     for top_level in top_levels:
         rows = ClassChoice.objects.filter(top_level=top_level)
         level_group[top_level] = list(rows)    
-    return render(request, 'classurvey/taxonomy.html', {'level_group': level_group})
+        top_level_description[top_level] = TopLevel.objects.get(top_level_name=top_level).top_level_description
+    return render(request, 'classurvey/taxonomy.html', {
+        'level_group': level_group, 'top_level_description':top_level_description
+    })
 
 def user_details_view(request):
     '''
