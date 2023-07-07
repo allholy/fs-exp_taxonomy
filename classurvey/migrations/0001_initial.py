@@ -67,12 +67,4 @@ class Migration(migrations.Migration):
                 ('test_sound', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='classurvey.testsound')),
             ],
         ),
-        migrations.CreateModel(
-            name='TopLevel',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('top_level_name', models.CharField(max_length=10)),
-                ('top_level_description', models.CharField(max_length=255)),
-            ],
-        ),
     ]
