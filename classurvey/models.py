@@ -1,5 +1,7 @@
 from django.db import models
 
+from multiselectfield import MultiSelectField
+
 
 # sounds for testing
 class TestSound(models.Model):
@@ -51,10 +53,21 @@ class UserDetailsModel(models.Model):
 
     yes_no = (('Y', 'Yes'), ('N', 'No'))
     experience_choices = (('1', 'No experience'), ('2', 'Experience as a hobbyist'), ('3', 'Experience as a professional'))
-    q1 = models.CharField(max_length=50,choices=yes_no,default="")
+    areas_choices = (
+        ('mr', 'Music or radio production'),
+        ('f', 'Film making, game development, video creation'),
+        ('s', 'Sound design'),
+        ('mc', 'Music composition'),
+        ('ex', 'Exploratory sound art, audio installations'),
+        ('ed', 'Education'),
+        ('r', 'Research')
+    )
+
+    q1 = models.CharField(max_length=50, choices=yes_no, default="")
     q2 = models.IntegerField(null=True, blank=True)
-    q3 = models.CharField(max_length=50,choices=experience_choices,default="")
-    q4 = models.CharField(max_length=50,choices=experience_choices,default="")
+    q3 = models.CharField(max_length=50, choices=experience_choices, default="")
+    q4 = models.CharField(max_length=50, choices=experience_choices, default="")
+    q5 = MultiSelectField(choices=areas_choices, max_choices=25, max_length=255, blank=True, default="")
     date_created = models.DateTimeField('Creation date', auto_now_add=True)
 
 

@@ -31,12 +31,14 @@ class UserDetailsForm(forms.ModelForm):
             'q2':'If so, how many sounds have you uploaded (approximately)?',
             'q3':'Do you have experience with audio/music technology?',
             'q4':'Do you have experience as a musician?',
+            'q5':'Which of these areas have you practiced (if any)?',
         }
         widgets = {
             'q1': forms.RadioSelect,
             'q2': forms.NumberInput(attrs={'min':0,'max':49999}),
             'q3': forms.RadioSelect,
             'q4': forms.RadioSelect,
+            'q5': forms.CheckboxSelectMultiple,
         }
 
 

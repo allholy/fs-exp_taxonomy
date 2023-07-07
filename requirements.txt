@@ -1,3 +1,4 @@
-Django==4.1.7
+Django==4.1.8
 django-bootstrap4==22.3
 django-extensions==3.2.1
+django-multiselectfield==0.1.12
