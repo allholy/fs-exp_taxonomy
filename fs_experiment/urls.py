@@ -16,7 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
+def crash_me(request):
+    raise Exception('I am a test exception')
+
 urlpatterns = [
     path('', include('classurvey.urls')),
     path('admin/', admin.site.urls),
+    path('crash_me/', crash_me),
 ]
