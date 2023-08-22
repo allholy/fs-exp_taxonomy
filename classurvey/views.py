@@ -287,6 +287,8 @@ def end_view(request):
 def informed_consent_view(request):
     return render(request, 'classurvey/informed_consent.html')
 
+def closed_view(request):
+    return render(request, 'classurvey/close_experiment.html')
 
 def count_groups_complete(request):
     '''

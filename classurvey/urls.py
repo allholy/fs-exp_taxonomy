@@ -4,7 +4,7 @@ from . import views
 app_name = 'classurvey'
 
 urlpatterns = [
-    path('', views.home_view, name='home'),
+    path('', views.closed_view, name='home'),
     path('instructions/', views.instructions_view, name='instructions'),
     path('taxonomy/', views.taxonomy_view, name='taxonomy'),
     path('details/', views.user_details_view, name='user_details'),
@@ -14,5 +14,5 @@ urlpatterns = [
     path('group-end/', views.group_end_view, name='group_end'),
     path('results/', views.results_view, name='results'),
     path('informed-consent/', views.informed_consent_view, name='informed_consent'),
-    path('export/', views.export_view, name='export')
+    path('export/', views.export_view, name='export'),
 ]
